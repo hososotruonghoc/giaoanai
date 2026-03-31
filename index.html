@@ -2614,75 +2614,247 @@ function downloadKhoLesson(index) {
     try {
       const pptx = new PptxGenJS();
       pptx.layout = 'LAYOUT_WIDE';
-      pptx.author = 'Giáo Án AI - Chung Trần';
+      pptx.author = 'Giáo Án AI - Thiết kế Chung Trần';
       pptx.subject = item.bai;
+      pptx.title = item.bai;
 
-      const colorMap = {
-        bia:       { bg:'1B6B4A', title:'FFFFFF', text:'E8F5EE', accent:'E8A838' },
-        khoidong:  { bg:'FEF3E2', title:'B57D1B', text:'78350F', accent:'E8A838' },
-        kienthuc:  { bg:'FFFFFF', title:'1B6B4A', text:'2C2416', accent:'2A9D6F' },
-        vitduminhoa:{ bg:'F5F3FF', title:'7C3AED', text:'2C2416', accent:'8B5CF6' },
-        luyentap:  { bg:'E8F5EE', title:'0F4A33', text:'2C2416', accent:'2A9D6F' },
-        trochoi:   { bg:'FEF3E2', title:'DC2626', text:'2C2416', accent:'F59E0B' },
-        vandung:   { bg:'FFFBEB', title:'D97706', text:'2C2416', accent:'F59E0B' },
-        tongket:   { bg:'1B6B4A', title:'FFFFFF', text:'E8F5EE', accent:'E8A838' }
+      // === BẢNG MÀU CHUYÊN NGHIỆP ===
+      const themes = {
+        bia:        { bg:'0B3D2E', bar:'E8A838', title:'FFFFFF', sub:'A8D5BA', accent:'F5C542' },
+        khoidong:   { bg:'FFF8EE', bar:'F59E0B', title:'92400E', text:'78350F', accent:'FBBF24', boxBg:'FEF3C7', boxBorder:'F59E0B', icon:'🌟' },
+        kienthuc:   { bg:'F0FDF4', bar:'16A34A', title:'14532D', text:'1F2937', accent:'22C55E', boxBg:'DCFCE7', boxBorder:'16A34A', icon:'📖' },
+        vitduminhoa:{ bg:'F5F3FF', bar:'7C3AED', title:'4C1D95', text:'1F2937', accent:'8B5CF6', boxBg:'EDE9FE', boxBorder:'7C3AED', icon:'💡' },
+        luyentap:   { bg:'EFF6FF', bar:'2563EB', title:'1E3A5F', text:'1F2937', accent:'3B82F6', boxBg:'DBEAFE', boxBorder:'2563EB', icon:'✏️' },
+        trochoi:    { bg:'FFF1F2', bar:'E11D48', title:'881337', text:'1F2937', accent:'FB7185', boxBg:'FFE4E6', boxBorder:'E11D48', icon:'🎮' },
+        vandung:    { bg:'FFFBEB', bar:'D97706', title:'78350F', text:'1F2937', accent:'F59E0B', boxBg:'FEF3C7', boxBorder:'D97706', icon:'🏠' },
+        tongket:    { bg:'0B3D2E', bar:'E8A838', title:'FFFFFF', text:'D1FAE5', accent:'F5C542', icon:'🎯' }
       };
+
+      const totalSlides = item.slides.length;
 
       item.slides.forEach((sd, sIdx) => {
         const loai = sd.loai || 'kienthuc';
-        const c = colorMap[loai] || colorMap.kienthuc;
+        const t = themes[loai] || themes.kienthuc;
         const slide = pptx.addSlide();
-        slide.background = { color: c.bg };
+        slide.background = { color: t.bg };
 
+        // ==========================================
+        // SLIDE BÌA
+        // ==========================================
         if (loai === 'bia') {
-          slide.addShape(pptx.ShapeType.rect, {x:0,y:0,w:'100%',h:0.08,fill:{color:'E8A838'}});
-          slide.addText(item.mon.toUpperCase()+' — '+item.lop.toUpperCase(), {x:0.5,y:1.0,w:'90%',h:0.6,fontSize:18,color:'E8A838',fontFace:'Arial',align:'center',bold:true});
-          slide.addText(sd.tieuDe, {x:0.5,y:2.0,w:'90%',h:1.8,fontSize:32,color:'FFFFFF',fontFace:'Arial',align:'center',bold:true,wrap:true});
-          slide.addText(item.chuDe, {x:0.5,y:4.0,w:'90%',h:0.5,fontSize:14,color:'B8E0CA',fontFace:'Arial',align:'center',italic:true});
-          slide.addText('Trường Tiểu Học Diễn Liên\nGiáo viên: .............................', {x:0.5,y:5.4,w:'90%',h:0.8,fontSize:14,color:'B8E0CA',fontFace:'Arial',align:'center'});
-          slide.addShape(pptx.ShapeType.rect, {x:0,y:7.42,w:'100%',h:0.08,fill:{color:'E8A838'}});
+          // Nền gradient giả bằng shapes
+          slide.addShape(pptx.ShapeType.rect, {x:0, y:0, w:'100%', h:'100%', fill:{color:'0B3D2E'}});
+          // Thanh vàng trên
+          slide.addShape(pptx.ShapeType.rect, {x:0, y:0, w:'100%', h:0.12, fill:{color:'E8A838'}});
+          // Hình trang trí trái
+          slide.addShape(pptx.ShapeType.ellipse, {x:-1.5, y:1, w:5, h:5, fill:{color:'0D4F38'}, line:{color:'0D4F38'}});
+          // Hình trang trí phải
+          slide.addShape(pptx.ShapeType.ellipse, {x:10, y:3, w:5, h:5, fill:{color:'0D4F38'}, line:{color:'0D4F38'}});
+
+          // Icon môn học
+          slide.addText(item.icon || '📚', {x:5.5, y:0.8, w:2.3, h:1.2, fontSize:48, align:'center', valign:'middle'});
+
+          // Môn + Lớp
+          slide.addText(item.mon.toUpperCase() + '  •  ' + item.lop.toUpperCase(), {
+            x:1, y:2.2, w:11.3, h:0.6, fontSize:20, color:'E8A838', fontFace:'Arial', align:'center', bold:true, letterSpacing:3
+          });
+
+          // Tên bài (lớn, đậm)
+          slide.addText(sd.tieuDe, {
+            x:1, y:3.0, w:11.3, h:1.8, fontSize:40, color:'FFFFFF', fontFace:'Arial', align:'center', bold:true, wrap:true, lineSpacing:48
+          });
+
+          // Chủ đề
+          slide.addShape(pptx.ShapeType.rect, {x:4, y:5.0, w:5.3, h:0.03, fill:{color:'E8A838'}});
+          slide.addText(item.chuDe, {
+            x:1.5, y:5.2, w:10.3, h:0.5, fontSize:16, color:'A8D5BA', fontFace:'Arial', align:'center', italic:true
+          });
+
+          // Thông tin trường
+          slide.addText('Trường Tiểu Học Diễn Liên', {
+            x:1, y:6.0, w:11.3, h:0.4, fontSize:16, color:'D1FAE5', fontFace:'Arial', align:'center', bold:true
+          });
+          slide.addText('Giáo viên: .............................', {
+            x:1, y:6.4, w:11.3, h:0.4, fontSize:14, color:'A8D5BA', fontFace:'Arial', align:'center'
+          });
+
+          // Thanh vàng dưới
+          slide.addShape(pptx.ShapeType.rect, {x:0, y:7.38, w:'100%', h:0.12, fill:{color:'E8A838'}});
           return;
         }
 
+        // ==========================================
+        // SLIDE TỔNG KẾT
+        // ==========================================
         if (loai === 'tongket') {
-          slide.addShape(pptx.ShapeType.rect, {x:0,y:0,w:'100%',h:0.06,fill:{color:'E8A838'}});
-          slide.addText(sd.tieuDe||'TỔNG KẾT', {x:0.5,y:1.5,w:'90%',h:0.8,fontSize:28,color:'FFFFFF',fontFace:'Arial',align:'center',bold:true});
-          if (sd.noiDung) slide.addText(sd.noiDung.map(n=>'✓  '+n).join('\n'), {x:1.5,y:2.8,w:'70%',h:3.5,fontSize:16,color:'E8F5EE',fontFace:'Arial',lineSpacing:32,valign:'top',wrap:true});
-          slide.addShape(pptx.ShapeType.rect, {x:0,y:7.44,w:'100%',h:0.06,fill:{color:'E8A838'}});
+          slide.addShape(pptx.ShapeType.rect, {x:0, y:0, w:'100%', h:'100%', fill:{color:'0B3D2E'}});
+          slide.addShape(pptx.ShapeType.rect, {x:0, y:0, w:'100%', h:0.08, fill:{color:'E8A838'}});
+          slide.addShape(pptx.ShapeType.ellipse, {x:-2, y:4, w:6, h:6, fill:{color:'0D4F38'}});
+          slide.addShape(pptx.ShapeType.ellipse, {x:11, y:-1, w:4, h:4, fill:{color:'0D4F38'}});
+
+          // Icon + Tiêu đề
+          slide.addText('🎯', {x:5.5, y:0.5, w:2.3, h:1, fontSize:40, align:'center'});
+          slide.addText(sd.tieuDe || 'TỔNG KẾT BÀI HỌC', {
+            x:1, y:1.5, w:11.3, h:0.7, fontSize:32, color:'FFFFFF', fontFace:'Arial', align:'center', bold:true
+          });
+          slide.addShape(pptx.ShapeType.rect, {x:4.5, y:2.3, w:4.3, h:0.04, fill:{color:'E8A838'}});
+
+          // Nội dung tổng kết trong box
+          if (sd.noiDung && sd.noiDung.length) {
+            slide.addShape(pptx.ShapeType.roundRect, {
+              x:1.5, y:2.8, w:10.3, h:4.0, fill:{color:'0D4F38'}, line:{color:'1B7A50', width:2}, rectRadius:0.2
+            });
+            const items = sd.noiDung.map((n, i) => ({
+              text: '  ✅  ' + n,
+              options: {fontSize:20, color:'D1FAE5', fontFace:'Arial', breakLine:true, lineSpacing:40, bold: i===0}
+            }));
+            slide.addText(items, {x:2.0, y:3.0, w:9.3, h:3.5, valign:'top', wrap:true, paraSpaceAfter:10});
+          }
+
+          // Số slide
+          slide.addText(sIdx+1 + '/' + totalSlides, {x:11.5, y:7.0, w:1.5, h:0.4, fontSize:11, color:'A8D5BA', fontFace:'Arial', align:'right'});
+          slide.addShape(pptx.ShapeType.rect, {x:0, y:7.42, w:'100%', h:0.08, fill:{color:'E8A838'}});
           return;
         }
 
-        slide.addShape(pptx.ShapeType.rect, {x:0,y:0,w:'100%',h:0.06,fill:{color:c.accent}});
-        slide.addText(String(sIdx+1), {x:12.0,y:0.15,w:0.5,h:0.4,fontSize:10,color:'999999',fontFace:'Arial',align:'right'});
-        slide.addText(sd.tieuDe||'', {x:0.5,y:0.3,w:'85%',h:0.7,fontSize:24,color:c.title,fontFace:'Arial',bold:true,wrap:true});
-        slide.addShape(pptx.ShapeType.rect, {x:0.5,y:1.1,w:2.5,h:0.04,fill:{color:c.accent}});
+        // ==========================================
+        // CÁC SLIDE NỘI DUNG (khoidong, kienthuc, luyentap, trochoi, vandung, vitduminhoa)
+        // ==========================================
 
+        // --- Header bar ---
+        slide.addShape(pptx.ShapeType.rect, {x:0, y:0, w:'100%', h:1.1, fill:{color:t.bar}});
+
+        // Nhãn loại slide (góc trái trên)
+        const labelMap = {
+          khoidong:'KHỞI ĐỘNG', kienthuc:'KIẾN THỨC MỚI', vitduminhoa:'VÍ DỤ MINH HỌA',
+          luyentap:'LUYỆN TẬP', trochoi:'TRÒ CHƠI', vandung:'VẬN DỤNG'
+        };
+        slide.addText((t.icon||'📖') + '  ' + (labelMap[loai]||loai.toUpperCase()), {
+          x:0.4, y:0.05, w:4, h:0.35, fontSize:11, color:'FFFFFF', fontFace:'Arial', bold:true, letterSpacing:1
+        });
+
+        // Tiêu đề slide (trong header bar)
+        slide.addText(sd.tieuDe || '', {
+          x:0.4, y:0.35, w:10, h:0.65, fontSize:26, color:'FFFFFF', fontFace:'Arial', bold:true, wrap:true, valign:'middle'
+        });
+
+        // Số slide (góc phải)
+        slide.addText(sIdx+1 + '/' + totalSlides, {
+          x:11.5, y:0.05, w:1.5, h:0.35, fontSize:11, color:'FFFFFF', fontFace:'Arial', align:'right', bold:true
+        });
+
+        // --- Vùng nội dung ---
+        const hasGame = sd.troChoi && typeof sd.troChoi === 'object';
+        const hasImage = sd.hinhAnh && !hasGame;
+        const contentW = (hasGame || hasImage) ? 7.0 : 12.0;
+        const contentX = 0.5;
+        const contentY = 1.4;
+        const contentH = 5.5;
+
+        // Nội dung chính (bên trái hoặc toàn bộ)
         if (sd.noiDung && sd.noiDung.length) {
-          const bullets = sd.noiDung.map(n=>({text:n,options:{fontSize:16,color:c.text,fontFace:'Arial',bullet:{code:'25CF',color:c.accent},breakLine:true,lineSpacing:28}}));
-          slide.addText(bullets, {x:0.5,y:1.4,w:sd.troChoi?'55%':'85%',h:4.5,valign:'top',wrap:true,paraSpaceAfter:8});
+          const items = sd.noiDung.map((n, i) => ({
+            text: n,
+            options: {
+              fontSize: 20,
+              color: t.text,
+              fontFace: 'Arial',
+              bullet: {code:'25CF', color:t.accent},
+              breakLine: true,
+              lineSpacing: 36,
+              paraSpaceBefore: 4,
+              paraSpaceAfter: 6
+            }
+          }));
+          slide.addText(items, {
+            x: contentX, y: contentY + 0.2, w: contentW, h: contentH, valign:'top', wrap:true
+          });
         }
 
-        if (sd.troChoi && typeof sd.troChoi === 'object') {
-          slide.addShape(pptx.ShapeType.roundRect, {x:8.0,y:1.4,w:4.8,h:4.5,fill:{color:'FEF3E2'},line:{color:'F5DEB3',width:1.5},rectRadius:0.15});
-          slide.addText('🎮 '+(sd.troChoi.ten||''), {x:8.2,y:1.5,w:4.4,h:0.5,fontSize:16,color:'B57D1B',fontFace:'Arial',bold:true});
-          let desc = '';
-          if (sd.troChoi.moTa) desc += sd.troChoi.moTa+'\n\n';
-          if (sd.troChoi.luatChoi) desc += '📏 '+sd.troChoi.luatChoi+'\n\n';
-          if (sd.troChoi.cauHoi) { desc += '📝 Câu hỏi:\n'; sd.troChoi.cauHoi.forEach((q,i)=>{desc+=(i+1)+'. '+q+'\n';}); }
-          if (desc) slide.addText(desc.trim(), {x:8.2,y:2.1,w:4.4,h:3.5,fontSize:11,color:'78350F',fontFace:'Arial',valign:'top',wrap:true,lineSpacing:18});
-        } else if (sd.hinhAnh) {
-          slide.addShape(pptx.ShapeType.roundRect, {x:8.5,y:1.4,w:4.3,h:3.2,fill:{color:'F0F4FF'},line:{color:'C7D2FE',width:1,dashType:'dash'},rectRadius:0.1});
-          slide.addText('🖼️ Chèn hình:\n'+sd.hinhAnh, {x:8.7,y:1.6,w:3.9,h:2.8,fontSize:10,color:'6B7280',fontFace:'Arial',valign:'middle',align:'center',wrap:true,italic:true});
+        // --- Box trò chơi (bên phải) ---
+        if (hasGame) {
+          const gx = 7.8, gy = 1.3, gw = 5.2, gh = 5.8;
+
+          // Nền box
+          slide.addShape(pptx.ShapeType.roundRect, {
+            x:gx, y:gy, w:gw, h:gh,
+            fill:{color:t.boxBg || 'FEF3C7'},
+            line:{color:t.boxBorder || 'F59E0B', width:2},
+            rectRadius:0.2,
+            shadow:{type:'outer', blur:6, offset:2, color:'00000020'}
+          });
+
+          // Header box trò chơi
+          slide.addShape(pptx.ShapeType.roundRect, {
+            x:gx, y:gy, w:gw, h:0.65,
+            fill:{color:t.boxBorder || 'F59E0B'},
+            rectRadius:0.2
+          });
+          // Che góc dưới của header cho vuông
+          slide.addShape(pptx.ShapeType.rect, {
+            x:gx, y:gy+0.45, w:gw, h:0.25,
+            fill:{color:t.boxBorder || 'F59E0B'}
+          });
+          slide.addText('🎮  ' + (sd.troChoi.ten || 'Trò chơi'), {
+            x:gx+0.15, y:gy+0.05, w:gw-0.3, h:0.55, fontSize:17, color:'FFFFFF', fontFace:'Arial', bold:true, valign:'middle'
+          });
+
+          // Nội dung trò chơi
+          let gameText = '';
+          if (sd.troChoi.moTa) gameText += '📋  ' + sd.troChoi.moTa + '\n\n';
+          if (sd.troChoi.luatChoi) gameText += '📏  Luật chơi: ' + sd.troChoi.luatChoi + '\n\n';
+          if (sd.troChoi.cauHoi && sd.troChoi.cauHoi.length) {
+            gameText += '📝  Câu hỏi:\n';
+            sd.troChoi.cauHoi.forEach((q, i) => {
+              gameText += '     ' + (i+1) + '.  ' + q + '\n';
+            });
+          }
+          if (gameText) {
+            slide.addText(gameText.trim(), {
+              x:gx+0.2, y:gy+0.8, w:gw-0.4, h:gh-1.0,
+              fontSize:13, color:t.text || '78350F', fontFace:'Arial',
+              valign:'top', wrap:true, lineSpacing:20, paraSpaceAfter:4
+            });
+          }
         }
 
-        slide.addShape(pptx.ShapeType.rect, {x:0,y:7.44,w:'100%',h:0.06,fill:{color:c.accent}});
+        // --- Box hình ảnh (bên phải, khi không có trò chơi) ---
+        if (hasImage) {
+          const ix = 7.8, iy = 1.5, iw = 4.8, ih = 4.5;
+          slide.addShape(pptx.ShapeType.roundRect, {
+            x:ix, y:iy, w:iw, h:ih,
+            fill:{color:'F8FAFC'},
+            line:{color:t.accent, width:2, dashType:'dash'},
+            rectRadius:0.15,
+            shadow:{type:'outer', blur:4, offset:2, color:'00000015'}
+          });
+          // Icon hình ảnh
+          slide.addText('🖼️', {x:ix, y:iy+0.5, w:iw, h:1.2, fontSize:48, align:'center', valign:'middle'});
+          // Mô tả hình
+          slide.addText(sd.hinhAnh, {
+            x:ix+0.3, y:iy+2.0, w:iw-0.6, h:ih-2.3,
+            fontSize:13, color:'6B7280', fontFace:'Arial',
+            valign:'top', align:'center', wrap:true, italic:true, lineSpacing:20
+          });
+          // Nhãn
+          slide.addText('▲ GV chèn hình minh họa tại đây', {
+            x:ix, y:iy+ih-0.5, w:iw, h:0.4,
+            fontSize:10, color:'9CA3AF', fontFace:'Arial', align:'center', italic:true
+          });
+        }
+
+        // --- Footer ---
+        slide.addShape(pptx.ShapeType.rect, {x:0, y:7.2, w:'100%', h:0.3, fill:{color:t.bar}});
+        slide.addText(item.bai + '  •  ' + item.lop, {
+          x:0.4, y:7.2, w:10, h:0.3, fontSize:10, color:'FFFFFF', fontFace:'Arial', valign:'middle'
+        });
       });
 
-      const fileName = 'KhoGA_'+removeVietnamese(item.mon)+'_'+item.lop.replace(' ','')+'_'+sanitizeFileName(item.bai);
+      const fileName = 'KhoGA_' + removeVietnamese(item.mon) + '_' + item.lop.replace(' ','') + '_' + sanitizeFileName(item.bai);
       pptx.writeFile({ fileName });
     } catch(err) {
       console.error('Lỗi:', err);
-      alert('Lỗi tạo file: '+err.message);
+      alert('Lỗi tạo file: ' + err.message);
     } finally {
       btn.innerHTML = origText;
       btn.disabled = false;
