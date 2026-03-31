@@ -1167,28 +1167,7 @@ select:disabled {
   Bộ sách: Kết nối tri thức với cuộc sống • Chương trình GDPT 2018
 </footer>
 
-<!-- ===== THƯ VIỆN XUẤT FILE ===== -->
-<script src="https://unpkg.com/docx@9.0.2/build/index.umd.min.js"></script>
-<script src="https://unpkg.com/pptxgenjs@3.12.0/dist/pptxgenjs.bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-<script>
-// Kiểm tra thư viện đã load chưa
-window.addEventListener('load', function() {
-  const missing = [];
-  if (typeof docx === 'undefined') missing.push('docx');
-  if (typeof PptxGenJS === 'undefined') missing.push('PptxGenJS');
-  if (typeof saveAs === 'undefined') missing.push('FileSaver');
-  if (missing.length > 0) {
-    console.warn('⚠️ Thư viện chưa load:', missing.join(', '));
-    const banner = document.createElement('div');
-    banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#FEE2E2;color:#991B1B;padding:10px 16px;font-size:13px;text-align:center;z-index:9999;font-family:sans-serif;';
-    banner.innerHTML = '⚠️ Thư viện <b>' + missing.join(', ') + '</b> chưa tải được. Tính năng xuất file có thể không hoạt động. Hãy tải lại trang (Ctrl+Shift+R).';
-    document.body.appendChild(banner);
-  } else {
-    console.log('✅ Tất cả thư viện đã load thành công: docx, PptxGenJS, FileSaver');
-  }
-});
-</script>
+<!-- Thư viện xuất file: load ở cuối body để không block JS chính -->
 
 <!-- ===== JAVASCRIPT ===== -->
 <script>
@@ -2558,160 +2537,69 @@ function switchTab(name) {
   }
 }
 
+
 // ========================================
-  {
-    id: 'l1_bai1', lop: 'Lớp 1', mon: 'Toán', soSlide: 10, mau: '#3B82F6',
-    bai: 'Bài 1: Các số 0, 1, 2, 3, 4, 5',
-    chuDe: 'Chủ đề 1: Các số từ 0 đến 10', icon: '🔢',
-    slides: [
-      { loai:'bia', tieuDe:'CÁC SỐ 0, 1, 2, 3, 4, 5' },
-      { loai:'khoidong', tieuDe:'Khởi động: Đếm đồ vật', noiDung:['Cô có mấy quả táo trên tay?','Cùng đếm theo cô: 1, 2, 3!','Trên bàn có bao nhiêu cái bút?'],troChoi:{ten:'Đếm theo nhạc',moTa:'Giáo viên vỗ tay, học sinh đếm theo',cauHoi:['Cô vỗ 3 cái, đó là số mấy?','Cô vỗ 5 cái, đó là số mấy?']}},
-      { loai:'kienthuc', tieuDe:'Số 1', noiDung:['Có 1 con mèo','Viết số 1','Số 1 đứng đầu tiên khi đếm'],hinhAnh:'Hình 1 con mèo dễ thương, bên cạnh là số 1 cỡ lớn màu đỏ' },
-      { loai:'kienthuc', tieuDe:'Số 2 và số 3', noiDung:['Có 2 con chim — viết số 2','Có 3 bông hoa — viết số 3','2 ít hơn 3, 3 nhiều hơn 2'],hinhAnh:'2 con chim trên cành + 3 bông hoa dưới đất' },
-      { loai:'kienthuc', tieuDe:'Số 4 và số 5', noiDung:['Có 4 ngôi sao — viết số 4','Có 5 ngón tay — viết số 5','Giơ tay đếm: 1, 2, 3, 4, 5!'],hinhAnh:'Bàn tay xòe 5 ngón, mỗi ngón đánh số' },
-      { loai:'kienthuc', tieuDe:'Số 0', noiDung:['Có 3 quả cam, ăn hết → còn 0','Số 0 nghĩa là "không có gì"','0 là số nhỏ nhất ta học hôm nay'],hinhAnh:'Rổ trống không có quả cam nào' },
-      { loai:'luyentap', tieuDe:'Luyện tập: Đếm và viết số', noiDung:['Đếm số con vật trong mỗi hình','Viết số tương ứng vào ô trống'],troChoi:{ten:'Ai nhanh hơn',moTa:'Giáo viên giơ hình, học sinh giơ thẻ số',cauHoi:['🐱🐱🐱 = ?','🌺🌺🌺🌺🌺 = ?','🍎 = ?','(rổ trống) = ?']}},
-      { loai:'trochoi', tieuDe:'Trò chơi: Đúng hay Sai?', noiDung:['Giáo viên nói: "Có 4 quả bóng" — Học sinh nhìn hình xem đúng hay sai'],troChoi:{ten:'Đúng hay Sai',moTa:'Hiện hình và số, HS giơ thẻ Đ hoặc S',cauHoi:['🐟🐟🐟 = 4? (Sai, đáp án 3)','⭐⭐⭐⭐⭐ = 5? (Đúng)','🍌🍌 = 2? (Đúng)','🎈🎈🎈🎈 = 3? (Sai, đáp án 4)']}},
-      { loai:'vandung', tieuDe:'Vận dụng', noiDung:['Về nhà đếm số người trong gia đình','Đếm số cửa sổ trong phòng em','Hỏi bố mẹ: nhà mình có mấy cái ghế?'] },
-      { loai:'tongket', tieuDe:'Tổng kết', noiDung:['Hôm nay ta học các số: 0, 1, 2, 3, 4, 5','Biết đếm và viết các số này','Dặn dò: Tập viết số vào vở ô li'] }
-    ]
-  },
-  {
-    id: 'l1_bai10', lop: 'Lớp 1', mon: 'Toán', soSlide: 10, mau: '#8B5CF6',
-    bai: 'Bài 10: Phép cộng trong phạm vi 10',
-    chuDe: 'Chủ đề 3: Phép cộng, phép trừ trong phạm vi 10', icon: '➕',
-    slides: [
-      { loai:'bia', tieuDe:'PHÉP CỘNG TRONG PHẠM VI 10' },
-      { loai:'khoidong', tieuDe:'Khởi động: Câu chuyện của thỏ', noiDung:['Thỏ có 2 củ cà rốt, mẹ cho thêm 3 củ','Hỏi: Thỏ có tất cả bao nhiêu củ?','Cùng tìm hiểu cách tính nhé!'],hinhAnh:'Chú thỏ cầm 2 củ cà rốt + mẹ thỏ đưa 3 củ' },
-      { loai:'kienthuc', tieuDe:'Phép cộng là gì?', noiDung:['Cộng = gộp lại, thêm vào','2 gộp với 3 → viết: 2 + 3 = 5','Dấu + đọc là "cộng", dấu = đọc là "bằng"'],hinhAnh:'2 quả táo xanh + 3 quả táo đỏ = 5 quả táo' },
-      { loai:'vitduminhoa', tieuDe:'Ví dụ minh họa', noiDung:['1 + 4 = 5 (1 con chó + 4 con chó = 5 con chó)','3 + 2 = 5 (3 bạn + 2 bạn = 5 bạn)','0 + 5 = 5 (không có gì + 5 = 5)'],hinhAnh:'Hình minh họa từng phép cộng với vật thật' },
-      { loai:'kienthuc', tieuDe:'Cộng các số lớn hơn', noiDung:['4 + 3 = 7','5 + 5 = 10','6 + 4 = 10'],hinhAnh:'Thanh khối 10 ô: tô màu 6 ô xanh + 4 ô vàng = 10' },
-      { loai:'kienthuc', tieuDe:'Dùng ngón tay để cộng', noiDung:['Giơ 3 ngón tay trái, 4 ngón tay phải','Đếm tất cả: 1, 2, 3, 4, 5, 6, 7','Vậy 3 + 4 = 7'],hinhAnh:'Hai bàn tay giơ ngón minh họa 3+4' },
-      { loai:'luyentap', tieuDe:'Luyện tập', noiDung:['Tính: 2 + 6 = ?','Tính: 5 + 4 = ?','Tính: 1 + 8 = ?','Tính: 7 + 3 = ?'] },
-      { loai:'trochoi', tieuDe:'Trò chơi: Rung chuông vàng', noiDung:['Giáo viên đọc phép tính, học sinh giơ đáp án'],troChoi:{ten:'Rung chuông vàng',moTa:'Ai giơ đáp án đúng và nhanh nhất được 1 điểm',cauHoi:['3 + 5 = ? (8)','2 + 7 = ? (9)','6 + 4 = ? (10)','1 + 1 = ? (2)','4 + 4 = ? (8)']}},
-      { loai:'vandung', tieuDe:'Vận dụng thực tế', noiDung:['Em có 3 viên kẹo, bạn cho thêm 2 viên. Em có tất cả mấy viên?','Trên bàn có 4 cốc, mẹ đặt thêm 5 cốc. Có tất cả mấy cốc?'] },
-      { loai:'tongket', tieuDe:'Tổng kết', noiDung:['Phép cộng = gộp lại','Kết quả phép cộng không quá 10','Dặn dò: Làm bài tập trang 58-59 SGK'] }
-    ]
-  },
-  {
-    id: 'l2_bai37', lop: 'Lớp 2', mon: 'Toán', soSlide: 10, mau: '#059669',
-    bai: 'Bài 37: Phép nhân',
-    chuDe: 'Chủ đề 8: Phép nhân, phép chia', icon: '✖️',
-    slides: [
-      { loai:'bia', tieuDe:'PHÉP NHÂN' },
-      { loai:'khoidong', tieuDe:'Khởi động: Đếm nhóm', noiDung:['Có 3 đĩa, mỗi đĩa có 2 quả cam','Đếm tổng: 2 + 2 + 2 = 6','Có cách viết nào ngắn hơn không?'],hinhAnh:'3 đĩa, mỗi đĩa 2 quả cam' },
-      { loai:'kienthuc', tieuDe:'Phép nhân là gì?', noiDung:['2 + 2 + 2 = 2 × 3 = 6','Đọc: "Hai nhân ba bằng sáu"','Phép nhân = cộng nhiều số giống nhau','Dấu × gọi là dấu nhân'],hinhAnh:'Phép cộng lặp → chuyển thành phép nhân' },
-      { loai:'vitduminhoa', tieuDe:'Ví dụ', noiDung:['5 + 5 + 5 + 5 = 5 × 4 = 20','3 + 3 = 3 × 2 = 6','4 + 4 + 4 = 4 × 3 = 12'],hinhAnh:'Từng nhóm đồ vật minh họa' },
-      { loai:'kienthuc', tieuDe:'Các thành phần', noiDung:['2 × 3 = 6','2 là thừa số, 3 là thừa số, 6 là tích','Thừa số × Thừa số = Tích'] },
-      { loai:'luyentap', tieuDe:'Luyện tập', noiDung:['Viết phép nhân: 4 + 4 + 4 + 4 + 4 = ?','3 + 3 + 3 = ? × ? = ?','Mỗi hộp có 5 bút, có 3 hộp. Viết phép nhân.'] },
-      { loai:'trochoi', tieuDe:'Trò chơi: Nối cặp đôi', noiDung:['Nối phép cộng với phép nhân tương ứng'],troChoi:{ten:'Nối cặp đôi',moTa:'Học sinh nối phép cộng lặp với phép nhân đúng',cauHoi:['6+6+6 ↔ 6×3','2+2+2+2 ↔ 2×4','5+5 ↔ 5×2','3+3+3+3+3 ↔ 3×5']}},
-      { loai:'trochoi', tieuDe:'Trò chơi: Vòng quay may mắn', noiDung:['Quay → ra phép nhân → trả lời'],troChoi:{ten:'Vòng quay may mắn',moTa:'Vòng quay hiện phép cộng lặp, HS viết phép nhân',cauHoi:['7+7+7 = ? (7×3=21)','9+9 = ? (9×2=18)','4+4+4+4 = ? (4×4=16)']}},
-      { loai:'vandung', tieuDe:'Vận dụng', noiDung:['Mỗi bàn có 4 học sinh, lớp có 5 bàn','Viết phép nhân tính tổng số học sinh','4 × 5 = 20 học sinh'] },
-      { loai:'tongket', tieuDe:'Tổng kết', noiDung:['Phép nhân = cộng các số giống nhau','Dấu × đọc là "nhân"','Thừa số × Thừa số = Tích'] }
-    ]
-  },
-  {
-    id: 'l2_bai51', lop: 'Lớp 2', mon: 'Toán', soSlide: 9, mau: '#D97706',
-    bai: 'Bài 51: Số có ba chữ số',
-    chuDe: 'Chủ đề 10: Các số trong phạm vi 1000', icon: '💯',
-    slides: [
-      { loai:'bia', tieuDe:'SỐ CÓ BA CHỮ SỐ' },
-      { loai:'khoidong', tieuDe:'Khởi động: Đếm que tính', noiDung:['Bó 1 trăm que, bó 10 que, và que rời','Đếm: 100, 110, 120... rồi thêm que rời','Làm sao viết số có 3 chữ số?'],hinhAnh:'Các bó que tính: 1 bó trăm, vài bó chục, vài que rời' },
-      { loai:'kienthuc', tieuDe:'Cấu tạo số có ba chữ số', noiDung:['Số 235 gồm: 2 trăm, 3 chục, 5 đơn vị','Hàng trăm: 2 | Hàng chục: 3 | Hàng đơn vị: 5','Đọc: Hai trăm ba mươi lăm'] },
-      { loai:'vitduminhoa', tieuDe:'Thêm ví dụ', noiDung:['407 = 4 trăm, 0 chục, 7 đơn vị','Đọc: Bốn trăm linh bảy','150 = 1 trăm, 5 chục, 0 đơn vị','Đọc: Một trăm năm mươi'] },
-      { loai:'luyentap', tieuDe:'Luyện tập: Đọc và viết số', noiDung:['Viết số: Ba trăm sáu mươi hai = ?','Đọc số: 518 = ?','Số 790 có mấy trăm, mấy chục, mấy đơn vị?'] },
-      { loai:'trochoi', tieuDe:'Trò chơi: Ai nhanh hơn', noiDung:['Giáo viên đọc số → Học sinh viết bảng con'],troChoi:{ten:'Ai nhanh hơn',moTa:'GV đọc số, HS viết nhanh vào bảng con, giơ lên',cauHoi:['Năm trăm bốn mươi ba (543)','Bảy trăm linh một (701)','Chín trăm chín mươi chín (999)','Hai trăm hai mươi hai (222)']}},
-      { loai:'trochoi', tieuDe:'Trò chơi: Ghép số', noiDung:['Dùng 3 thẻ số ghép thành số có 3 chữ số'],troChoi:{ten:'Ghép số',moTa:'Cho 3 thẻ số, ghép tất cả các số có 3 chữ số khác nhau',cauHoi:['Thẻ 3, 5, 1 → ghép được: 135, 153, 315, 351, 513, 531','Số lớn nhất là? (531)','Số nhỏ nhất là? (135)']}},
-      { loai:'vandung', tieuDe:'Vận dụng', noiDung:['Số nhà em là số có mấy chữ số?','Đọc số trang cuối cùng của sách Toán','Biển số xe máy nhà em có số nào có 3 chữ số?'] },
-      { loai:'tongket', tieuDe:'Tổng kết', noiDung:['Số có 3 chữ số gồm: hàng trăm, hàng chục, hàng đơn vị','Biết đọc, viết số có ba chữ số','Dặn dò: Làm bài tập SGK trang 85'] }
-    ]
-  },
-  {
-    id: 'l3_bai9', lop: 'Lớp 3', mon: 'Toán', soSlide: 10, mau: '#DC2626',
-    bai: 'Bài 9: Bảng nhân 6, bảng chia 6',
-    chuDe: 'Chủ đề 2: Bảng nhân, bảng chia', icon: '🔁',
-    slides: [
-      { loai:'bia', tieuDe:'BẢNG NHÂN 6, BẢNG CHIA 6' },
-      { loai:'khoidong', tieuDe:'Khởi động: Ôn bảng nhân 5', noiDung:['5 × 3 = ?', '5 × 7 = ?', '5 × 9 = ?', 'Hôm nay ta học bảng nhân 6!'],troChoi:{ten:'Truyền điện',moTa:'Học sinh truyền nhau đọc bảng nhân 5, ai sai thì bị "điện giật" (ngồi xuống)',cauHoi:['5×1=5','5×4=20','5×8=40']}},
-      { loai:'kienthuc', tieuDe:'Lập bảng nhân 6', noiDung:['6×1=6  (lấy 6 một lần)','6×2=12 (lấy 6 hai lần: 6+6)','6×3=18 (lấy 6 ba lần: 6+6+6)','6×4=24 ... cho đến 6×10=60'],hinhAnh:'Bảng nhân 6 đầy đủ, mỗi dòng kèm hình nhóm 6 chấm tròn' },
-      { loai:'kienthuc', tieuDe:'Bảng nhân 6 đầy đủ', noiDung:['6×1=6   6×6=36','6×2=12  6×7=42','6×3=18  6×8=48','6×4=24  6×9=54','6×5=30  6×10=60'],hinhAnh:'Bảng nhân 6 dạng poster đẹp, màu sắc' },
-      { loai:'kienthuc', tieuDe:'Từ bảng nhân → bảng chia 6', noiDung:['6 × 4 = 24 → 24 : 6 = 4','6 × 7 = 42 → 42 : 6 = 7','Nhân và chia là hai phép tính ngược nhau'] },
-      { loai:'luyentap', tieuDe:'Luyện tập', noiDung:['Tính: 6 × 5 = ?','Tính: 48 : 6 = ?','Tính: 6 × 9 = ?','Điền số: 6 × ? = 30'] },
-      { loai:'trochoi', tieuDe:'Trò chơi: Rung chuông vàng', noiDung:['10 câu hỏi nhân chia 6, ai nhanh nhất thắng'],troChoi:{ten:'Rung chuông vàng',moTa:'Giáo viên đọc phép tính, HS giơ bảng con đáp án',cauHoi:['6×3=? (18)','36:6=? (6)','6×8=? (48)','54:6=? (9)','6×6=? (36)']}},
-      { loai:'trochoi', tieuDe:'Trò chơi: Ong tìm hoa', noiDung:['Mỗi bông hoa có phép tính, ong bay đến hoa có đáp án đúng'],troChoi:{ten:'Ong tìm hoa',moTa:'Ong mang số, bay đến bông hoa có phép tính cho kết quả bằng số đó',cauHoi:['Ong mang số 42 → hoa 6×7','Ong mang số 30 → hoa 6×5','Ong mang số 12 → hoa 6×2']}},
-      { loai:'vandung', tieuDe:'Vận dụng', noiDung:['Mỗi tuần có 6 ngày đi học. Hỏi 4 tuần có bao nhiêu ngày đi học?','6 × 4 = 24 ngày'] },
-      { loai:'tongket', tieuDe:'Tổng kết', noiDung:['Thuộc bảng nhân 6 từ 6×1 đến 6×10','Biết chia cho 6 dựa vào bảng nhân','Dặn dò: Học thuộc bảng nhân 6, làm VBT'] }
-    ]
-  },
-  {
-    id: 'l3_bai50', lop: 'Lớp 3', mon: 'Toán', soSlide: 10, mau: '#0891B2',
-    bai: 'Bài 50: Chu vi hình tam giác, hình tứ giác, hình chữ nhật, hình vuông',
-    chuDe: 'Chủ đề 9: Chu vi, diện tích', icon: '📐',
-    slides: [
-      { loai:'bia', tieuDe:'CHU VI CÁC HÌNH' },
-      { loai:'khoidong', tieuDe:'Khởi động: Đi dạo quanh sân', noiDung:['Em đi 1 vòng quanh sân trường','Quãng đường em đi = chu vi sân trường','Chu vi = tổng độ dài các cạnh bao quanh hình'],hinhAnh:'Sân trường nhìn từ trên cao, đường đi quanh tô đỏ' },
-      { loai:'kienthuc', tieuDe:'Chu vi hình tam giác', noiDung:['Hình tam giác có 3 cạnh','Chu vi = cạnh 1 + cạnh 2 + cạnh 3','Ví dụ: Cạnh 3cm, 4cm, 5cm → Chu vi = 3+4+5 = 12cm'],hinhAnh:'Hình tam giác có ghi độ dài 3 cạnh' },
-      { loai:'kienthuc', tieuDe:'Chu vi hình tứ giác', noiDung:['Hình tứ giác có 4 cạnh','Chu vi = cộng 4 cạnh lại','Ví dụ: 2cm+3cm+4cm+5cm = 14cm'],hinhAnh:'Hình tứ giác bất kỳ ghi 4 cạnh' },
-      { loai:'kienthuc', tieuDe:'Chu vi hình chữ nhật', noiDung:['Hình chữ nhật: 2 cạnh dài bằng nhau, 2 cạnh ngắn bằng nhau','Chu vi = (dài + rộng) × 2','Ví dụ: dài 5cm, rộng 3cm → CV = (5+3)×2 = 16cm'],hinhAnh:'Hình chữ nhật có ghi chiều dài, chiều rộng, công thức' },
-      { loai:'kienthuc', tieuDe:'Chu vi hình vuông', noiDung:['Hình vuông: 4 cạnh bằng nhau','Chu vi = cạnh × 4','Ví dụ: cạnh 4cm → CV = 4×4 = 16cm'],hinhAnh:'Hình vuông có ghi độ dài cạnh, công thức' },
-      { loai:'luyentap', tieuDe:'Luyện tập', noiDung:['Tính chu vi hình chữ nhật: dài 7cm, rộng 4cm','Tính chu vi hình vuông cạnh 6cm','Tam giác có 3 cạnh: 5cm, 6cm, 8cm. Tính chu vi.'] },
-      { loai:'trochoi', tieuDe:'Trò chơi: Đúng hay Sai', noiDung:['Giáo viên đưa phép tính chu vi, HS phán đoán'],troChoi:{ten:'Đúng hay Sai',moTa:'GV hiện kết quả tính chu vi, HS giơ thẻ Đ/S',cauHoi:['HCN dài 5, rộng 3 → CV=15? (Sai, =16)','HV cạnh 5 → CV=20? (Đúng)','Tam giác 3,4,5 → CV=13? (Sai, =12)','HCN dài 8, rộng 2 → CV=20? (Đúng)']}},
-      { loai:'vandung', tieuDe:'Vận dụng', noiDung:['Đo cạnh bàn học rồi tính chu vi','Mảnh vườn hình chữ nhật dài 10m, rộng 6m. Tính chu vi để rào lưới.','(10+6)×2 = 32m'] },
-      { loai:'tongket', tieuDe:'Tổng kết', noiDung:['Chu vi = tổng độ dài các cạnh','Hình chữ nhật: CV = (dài+rộng) × 2','Hình vuông: CV = cạnh × 4'] }
-    ]
-  },
-  {
-    id: 'l4_bai53', lop: 'Lớp 4', mon: 'Toán', soSlide: 10, mau: '#7C3AED',
-    bai: 'Bài 53: Khái niệm phân số',
-    chuDe: 'Chủ đề 10: Phân số', icon: '🍕',
-    slides: [
-      { loai:'bia', tieuDe:'KHÁI NIỆM PHÂN SỐ' },
-      { loai:'khoidong', tieuDe:'Khởi động: Chia bánh pizza', noiDung:['Cắt bánh pizza làm 4 phần bằng nhau','Bạn An ăn 1 phần','An ăn được bao nhiêu phần của cái bánh?'],hinhAnh:'Bánh pizza chia 4 phần, tô màu 1 phần' },
-      { loai:'kienthuc', tieuDe:'Phân số là gì?', noiDung:['An ăn 1 phần trong 4 phần → viết: 1/4','1/4 là một phân số','1 gọi là tử số (phần đã lấy)','4 gọi là mẫu số (tổng số phần bằng nhau)'],hinhAnh:'Phân số 1/4 cỡ lớn, mũi tên chỉ tử số và mẫu số' },
-      { loai:'vitduminhoa', tieuDe:'Ví dụ phân số', noiDung:['Hình tròn chia 3 phần, tô 2 phần → 2/3','Hình vuông chia 8 phần, tô 5 phần → 5/8','Băng giấy chia 6 phần, tô 1 phần → 1/6'],hinhAnh:'3 hình minh họa khác nhau cho 3 phân số' },
-      { loai:'kienthuc', tieuDe:'Đọc phân số', noiDung:['1/2 đọc: một phần hai','3/4 đọc: ba phần tư','5/8 đọc: năm phần tám','Quy tắc: đọc tử số trước, mẫu số sau'] },
-      { loai:'kienthuc', tieuDe:'Phân số đặc biệt', noiDung:['1/2 = một nửa','1/4 = một phần tư','3/4 = ba phần tư','4/4 = 1 (cả cái bánh)'] },
-      { loai:'luyentap', tieuDe:'Luyện tập', noiDung:['Viết phân số chỉ phần tô màu của mỗi hình','Đọc các phân số: 2/5, 7/10, 3/8','Tô màu 3/4 hình chữ nhật'] },
-      { loai:'trochoi', tieuDe:'Trò chơi: Vòng quay phân số', noiDung:['Quay → ra hình → viết phân số'],troChoi:{ten:'Vòng quay may mắn',moTa:'Vòng quay hiện hình chia phần có tô màu, HS viết phân số tương ứng',cauHoi:['Hình tròn chia 2, tô 1 → 1/2','Hình vuông chia 4, tô 3 → 3/4','Băng giấy chia 5, tô 2 → 2/5','Hình tròn chia 8, tô 7 → 7/8']}},
-      { loai:'vandung', tieuDe:'Vận dụng', noiDung:['Lớp có 30 bạn, 15 bạn nữ → Số bạn nữ = 15/30 = 1/2 lớp','Mẹ cắt dưa hấu thành 8 miếng, em ăn 3 miếng → 3/8 quả dưa'] },
-      { loai:'tongket', tieuDe:'Tổng kết', noiDung:['Phân số gồm tử số (trên) và mẫu số (dưới)','Mẫu số = tổng phần chia đều, Tử số = phần được lấy','Dặn dò: Làm bài tập SGK trang 112'] }
-    ]
-  },
-  {
-    id: 'l5_bai27', lop: 'Lớp 5', mon: 'Toán', soSlide: 11, mau: '#0D9488',
-    bai: 'Bài 27: Đường tròn. Chu vi và diện tích hình tròn',
-    chuDe: 'Chủ đề 5: Một số hình phẳng. Chu vi và diện tích', icon: '⭕',
-    slides: [
-      { loai:'bia', tieuDe:'ĐƯỜNG TRÒN\nCHU VI VÀ DIỆN TÍCH HÌNH TRÒN' },
-      { loai:'khoidong', tieuDe:'Khởi động: Vật hình tròn quanh ta', noiDung:['Kể tên đồ vật hình tròn: đồng hồ, bánh xe, nắp chai...','Làm sao tính được "vòng quanh" bánh xe?','Làm sao tính được "mặt" của chiếc đĩa?'],hinhAnh:'Nhiều vật hình tròn trong cuộc sống' },
-      { loai:'kienthuc', tieuDe:'Các yếu tố của đường tròn', noiDung:['Tâm O: điểm chính giữa','Bán kính r: đoạn từ tâm đến đường tròn','Đường kính d: đoạn đi qua tâm, d = 2 × r','Ví dụ: r = 5cm → d = 10cm'],hinhAnh:'Hình tròn có đánh dấu tâm O, bán kính r, đường kính d' },
-      { loai:'kienthuc', tieuDe:'Số Pi (π)', noiDung:['π ≈ 3,14','π = Chu vi ÷ Đường kính','Đây là số cố định cho mọi hình tròn','Người xưa đã phát hiện ra π hơn 4000 năm trước!'],hinhAnh:'Ký hiệu π cỡ lớn, kèm giá trị 3,14159...' },
-      { loai:'kienthuc', tieuDe:'Công thức chu vi hình tròn', noiDung:['C = d × π = d × 3,14','Hoặc: C = 2 × r × 3,14','Ví dụ: d = 10cm → C = 10 × 3,14 = 31,4cm','Ví dụ: r = 7cm → C = 2 × 7 × 3,14 = 43,96cm'],hinhAnh:'Công thức C = d × 3,14 trong khung nổi bật' },
-      { loai:'kienthuc', tieuDe:'Công thức diện tích hình tròn', noiDung:['S = r × r × π = r × r × 3,14','Ví dụ: r = 5cm → S = 5 × 5 × 3,14 = 78,5cm²','Nhớ: dùng bán kính (r), không phải đường kính!'],hinhAnh:'Công thức S = r × r × 3,14 trong khung nổi bật, hình tròn tô màu' },
-      { loai:'luyentap', tieuDe:'Luyện tập', noiDung:['Tính chu vi hình tròn có d = 6cm','Tính diện tích hình tròn có r = 4cm','Bánh xe có đường kính 50cm. Tính chu vi bánh xe.'] },
-      { loai:'trochoi', tieuDe:'Trò chơi: Ai giỏi hơn', noiDung:['2 đội thi tính nhanh chu vi, diện tích'],troChoi:{ten:'Ai giỏi hơn',moTa:'2 đội, mỗi đội cử 1 bạn lên tính. Đội nào đúng và nhanh hơn được điểm.',cauHoi:['r=3cm, tính C? (18,84cm)','d=8cm, tính S? (r=4, S=50,24cm²)','r=10cm, tính C? (62,8cm)','d=14cm, tính C? (43,96cm)']}},
-      { loai:'trochoi', tieuDe:'Trò chơi: Đúng hay Sai', noiDung:['GV đưa kết quả, HS phán đoán'],troChoi:{ten:'Đúng hay Sai',moTa:'GV hiện phép tính và kết quả, HS giơ Đ hoặc S',cauHoi:['r=5, C=31,4? (Đúng: C=2×5×3,14=31,4)','d=10, S=314? (Sai: r=5, S=5×5×3,14=78,5)','r=6, S=113,04? (Đúng: 6×6×3,14=113,04)','d=4, C=12,__(56)? (Đúng: 4×3,14=12,56)']}},
-      { loai:'vandung', tieuDe:'Vận dụng', noiDung:['Mặt đồng hồ có đường kính 30cm. Tính chu vi và diện tích mặt đồng hồ.','CV = 30 × 3,14 = 94,2cm','S = 15 × 15 × 3,14 = 706,5cm²'] },
-      { loai:'tongket', tieuDe:'Tổng kết', noiDung:['Chu vi: C = d × 3,14 = 2 × r × 3,14','Diện tích: S = r × r × 3,14','Nhớ: π ≈ 3,14','Dặn dò: Làm VBT, đo đường kính 1 vật tròn ở nhà rồi tính CV, DT'] }
-    ]
+// KHO GIÁO ÁN: LOAD TỪ FILE kho.json
+// ========================================
+
+let KHO_DATA = [];
+
+async function loadKhoData() {
+  try {
+    let resp = await fetch('kho.json');
+    if (!resp.ok) resp = await fetch('./kho.json');
+    if (!resp.ok) throw new Error('Không tìm thấy kho.json');
+    KHO_DATA = await resp.json();
+    document.getElementById('khoCount').textContent = KHO_DATA.length;
+    console.log('✅ Đã tải kho:', KHO_DATA.length, 'bài giảng');
+  } catch(e) {
+    console.warn('⚠️ Không tải được kho.json:', e.message);
+    KHO_DATA = [];
   }
-];
+}
+
+// ========================================
+// CHUYỂN TRANG (TẠO MỚI / KHO)
+// ========================================
+
+function switchPage(page) {
+  document.querySelectorAll('.top-nav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+
+  if (page === 'kho') {
+    document.getElementById('navKho').classList.add('active');
+    document.getElementById('pageKho').classList.add('active');
+    renderKhoCards('all');
+  } else {
+    document.getElementById('navTaomoi').classList.add('active');
+    document.getElementById('pageTaomoi').classList.add('active');
+  }
+}
 
 // ========================================
 // RENDER KHO CARDS
 // ========================================
 
-let khoRendered = false;
-
-function renderKhoCards(filter = 'all') {
+function renderKhoCards(filter) {
   const grid = document.getElementById('khoGrid');
-  const filtered = filter === 'all' ? KHO_DATA : KHO_DATA.filter(k => k.lop === filter);
+  if (!KHO_DATA.length) {
+    grid.innerHTML = '<div class="empty-state"><div class="icon">⏳</div><p>Đang tải dữ liệu kho...</p></div>';
+    loadKhoData().then(() => renderKhoCards(filter));
+    return;
+  }
 
-  let html = '';
-  filtered.forEach((item, idx) => {
+  const filtered = (!filter || filter === 'all') ? KHO_DATA : KHO_DATA.filter(k => k.lop === filter);
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="icon">📭</div><p>Chưa có bài giảng cho lớp này.</p></div>';
+    document.getElementById('khoCount').textContent = '0';
+    return;
+  }
+
+  grid.innerHTML = filtered.map((item) => {
     const realIdx = KHO_DATA.indexOf(item);
-    html += `
-    <div class="kho-card" data-lop="${item.lop}">
+    return `
+    <div class="kho-card">
       <div class="kho-card-thumb" style="background:linear-gradient(135deg, ${item.mau}, ${item.mau}CC);">
         <span class="thumb-icon">${item.icon}</span>
         <span class="thumb-label">${item.lop}</span>
@@ -2726,15 +2614,9 @@ function renderKhoCards(filter = 'all') {
         </button>
       </div>
     </div>`;
-  });
+  }).join('');
 
-  if (filtered.length === 0) {
-    html = '<div class="empty-state" style="grid-column:1/-1;"><div class="icon">📭</div><p>Chưa có bài giảng cho lớp này. Sẽ bổ sung sớm!</p></div>';
-  }
-
-  grid.innerHTML = html;
   document.getElementById('khoCount').textContent = filtered.length;
-  khoRendered = true;
 }
 
 function filterKho(lop) {
@@ -2749,7 +2631,7 @@ function filterKho(lop) {
 
 function downloadKhoLesson(index) {
   if (typeof PptxGenJS === 'undefined') {
-    alert('⚠️ Thư viện PptxGenJS chưa tải xong.\n\nHãy tải lại trang (Ctrl+Shift+R) rồi thử lại.');
+    alert('⚠️ Thư viện PptxGenJS chưa tải xong.\nHãy tải lại trang (Ctrl+Shift+R).');
     return;
   }
   const item = KHO_DATA[index];
@@ -2760,7 +2642,6 @@ function downloadKhoLesson(index) {
   btn.innerHTML = '⏳ Đang tạo file...';
   btn.disabled = true;
 
-  // Dùng setTimeout để UI cập nhật trước khi sinh file
   setTimeout(() => {
     try {
       const pptx = new PptxGenJS();
@@ -2769,82 +2650,70 @@ function downloadKhoLesson(index) {
       pptx.subject = item.bai;
 
       const colorMap = {
-        bia:       { bg: '1B6B4A', title: 'FFFFFF', text: 'E8F5EE', accent: 'E8A838' },
-        khoidong:  { bg: 'FEF3E2', title: 'B57D1B', text: '78350F', accent: 'E8A838' },
-        kienthuc:  { bg: 'FFFFFF', title: '1B6B4A', text: '2C2416', accent: '2A9D6F' },
-        vitduminhoa:{ bg: 'F5F3FF', title: '7C3AED', text: '2C2416', accent: '8B5CF6' },
-        luyentap:  { bg: 'E8F5EE', title: '0F4A33', text: '2C2416', accent: '2A9D6F' },
-        trochoi:   { bg: 'FEF3E2', title: 'DC2626', text: '2C2416', accent: 'F59E0B' },
-        vandung:   { bg: 'FFFBEB', title: 'D97706', text: '2C2416', accent: 'F59E0B' },
-        tongket:   { bg: '1B6B4A', title: 'FFFFFF', text: 'E8F5EE', accent: 'E8A838' }
+        bia:       { bg:'1B6B4A', title:'FFFFFF', text:'E8F5EE', accent:'E8A838' },
+        khoidong:  { bg:'FEF3E2', title:'B57D1B', text:'78350F', accent:'E8A838' },
+        kienthuc:  { bg:'FFFFFF', title:'1B6B4A', text:'2C2416', accent:'2A9D6F' },
+        vitduminhoa:{ bg:'F5F3FF', title:'7C3AED', text:'2C2416', accent:'8B5CF6' },
+        luyentap:  { bg:'E8F5EE', title:'0F4A33', text:'2C2416', accent:'2A9D6F' },
+        trochoi:   { bg:'FEF3E2', title:'DC2626', text:'2C2416', accent:'F59E0B' },
+        vandung:   { bg:'FFFBEB', title:'D97706', text:'2C2416', accent:'F59E0B' },
+        tongket:   { bg:'1B6B4A', title:'FFFFFF', text:'E8F5EE', accent:'E8A838' }
       };
 
       item.slides.forEach((sd, sIdx) => {
         const loai = sd.loai || 'kienthuc';
-        const colors = colorMap[loai] || colorMap.kienthuc;
+        const c = colorMap[loai] || colorMap.kienthuc;
         const slide = pptx.addSlide();
-        slide.background = { color: colors.bg };
+        slide.background = { color: c.bg };
 
-        // ===== BÌA =====
         if (loai === 'bia') {
-          slide.addShape(pptx.ShapeType.rect, { x:0,y:0,w:'100%',h:0.08, fill:{color:'E8A838'} });
-          slide.addText(item.mon.toUpperCase() + ' — ' + item.lop.toUpperCase(), {
-            x:0.5,y:1.0,w:'90%',h:0.6, fontSize:18,color:'E8A838',fontFace:'Arial',align:'center',bold:true });
-          slide.addText(sd.tieuDe, {
-            x:0.5,y:2.0,w:'90%',h:1.8, fontSize:32,color:'FFFFFF',fontFace:'Arial',align:'center',bold:true,wrap:true });
-          slide.addText(item.chuDe, {
-            x:0.5,y:4.0,w:'90%',h:0.5, fontSize:14,color:'B8E0CA',fontFace:'Arial',align:'center',italic:true });
-          slide.addText('Trường Tiểu Học Diễn Liên\nGiáo viên: .............................', {
-            x:0.5,y:5.4,w:'90%',h:0.8, fontSize:14,color:'B8E0CA',fontFace:'Arial',align:'center' });
-          slide.addShape(pptx.ShapeType.rect, { x:0,y:7.42,w:'100%',h:0.08, fill:{color:'E8A838'} });
+          slide.addShape(pptx.ShapeType.rect, {x:0,y:0,w:'100%',h:0.08,fill:{color:'E8A838'}});
+          slide.addText(item.mon.toUpperCase()+' — '+item.lop.toUpperCase(), {x:0.5,y:1.0,w:'90%',h:0.6,fontSize:18,color:'E8A838',fontFace:'Arial',align:'center',bold:true});
+          slide.addText(sd.tieuDe, {x:0.5,y:2.0,w:'90%',h:1.8,fontSize:32,color:'FFFFFF',fontFace:'Arial',align:'center',bold:true,wrap:true});
+          slide.addText(item.chuDe, {x:0.5,y:4.0,w:'90%',h:0.5,fontSize:14,color:'B8E0CA',fontFace:'Arial',align:'center',italic:true});
+          slide.addText('Trường Tiểu Học Diễn Liên\nGiáo viên: .............................', {x:0.5,y:5.4,w:'90%',h:0.8,fontSize:14,color:'B8E0CA',fontFace:'Arial',align:'center'});
+          slide.addShape(pptx.ShapeType.rect, {x:0,y:7.42,w:'100%',h:0.08,fill:{color:'E8A838'}});
           return;
         }
 
-        // ===== TỔNG KẾT =====
         if (loai === 'tongket') {
-          slide.addShape(pptx.ShapeType.rect, { x:0,y:0,w:'100%',h:0.06, fill:{color:'E8A838'} });
-          slide.addText(sd.tieuDe || 'TỔNG KẾT', {
-            x:0.5,y:1.5,w:'90%',h:0.8, fontSize:28,color:'FFFFFF',fontFace:'Arial',align:'center',bold:true });
-          if (sd.noiDung) {
-            slide.addText(sd.noiDung.map(n=>'✓  '+n).join('\n'), {
-              x:1.5,y:2.8,w:'70%',h:3.5, fontSize:16,color:'E8F5EE',fontFace:'Arial',lineSpacing:32,valign:'top',wrap:true });
-          }
-          slide.addShape(pptx.ShapeType.rect, { x:0,y:7.44,w:'100%',h:0.06, fill:{color:'E8A838'} });
+          slide.addShape(pptx.ShapeType.rect, {x:0,y:0,w:'100%',h:0.06,fill:{color:'E8A838'}});
+          slide.addText(sd.tieuDe||'TỔNG KẾT', {x:0.5,y:1.5,w:'90%',h:0.8,fontSize:28,color:'FFFFFF',fontFace:'Arial',align:'center',bold:true});
+          if (sd.noiDung) slide.addText(sd.noiDung.map(n=>'✓  '+n).join('\n'), {x:1.5,y:2.8,w:'70%',h:3.5,fontSize:16,color:'E8F5EE',fontFace:'Arial',lineSpacing:32,valign:'top',wrap:true});
+          slide.addShape(pptx.ShapeType.rect, {x:0,y:7.44,w:'100%',h:0.06,fill:{color:'E8A838'}});
           return;
         }
 
-        // ===== SLIDE THƯỜNG =====
-        slide.addShape(pptx.ShapeType.rect, { x:0,y:0,w:'100%',h:0.06, fill:{color:colors.accent} });
-        slide.addText(String(sIdx+1), { x:12.0,y:0.15,w:0.5,h:0.4, fontSize:10,color:'999999',fontFace:'Arial',align:'right' });
-        slide.addText(sd.tieuDe||'', { x:0.5,y:0.3,w:'85%',h:0.7, fontSize:24,color:colors.title,fontFace:'Arial',bold:true,wrap:true });
-        slide.addShape(pptx.ShapeType.rect, { x:0.5,y:1.1,w:2.5,h:0.04, fill:{color:colors.accent} });
+        slide.addShape(pptx.ShapeType.rect, {x:0,y:0,w:'100%',h:0.06,fill:{color:c.accent}});
+        slide.addText(String(sIdx+1), {x:12.0,y:0.15,w:0.5,h:0.4,fontSize:10,color:'999999',fontFace:'Arial',align:'right'});
+        slide.addText(sd.tieuDe||'', {x:0.5,y:0.3,w:'85%',h:0.7,fontSize:24,color:c.title,fontFace:'Arial',bold:true,wrap:true});
+        slide.addShape(pptx.ShapeType.rect, {x:0.5,y:1.1,w:2.5,h:0.04,fill:{color:c.accent}});
 
         if (sd.noiDung && sd.noiDung.length) {
-          const bullets = sd.noiDung.map(n=>({ text:n, options:{fontSize:16,color:colors.text,fontFace:'Arial',bullet:{code:'25CF',color:colors.accent},breakLine:true,lineSpacing:28} }));
-          slide.addText(bullets, { x:0.5,y:1.4,w:sd.troChoi?'55%':'85%',h:4.5, valign:'top',wrap:true,paraSpaceAfter:8 });
+          const bullets = sd.noiDung.map(n=>({text:n,options:{fontSize:16,color:c.text,fontFace:'Arial',bullet:{code:'25CF',color:c.accent},breakLine:true,lineSpacing:28}}));
+          slide.addText(bullets, {x:0.5,y:1.4,w:sd.troChoi?'55%':'85%',h:4.5,valign:'top',wrap:true,paraSpaceAfter:8});
         }
 
         if (sd.troChoi && typeof sd.troChoi === 'object') {
-          slide.addShape(pptx.ShapeType.roundRect, { x:8.0,y:1.4,w:4.8,h:4.5, fill:{color:'FEF3E2'}, line:{color:'F5DEB3',width:1.5}, rectRadius:0.15 });
-          slide.addText('🎮 '+(sd.troChoi.ten||'Trò chơi'), { x:8.2,y:1.5,w:4.4,h:0.5, fontSize:16,color:'B57D1B',fontFace:'Arial',bold:true });
+          slide.addShape(pptx.ShapeType.roundRect, {x:8.0,y:1.4,w:4.8,h:4.5,fill:{color:'FEF3E2'},line:{color:'F5DEB3',width:1.5},rectRadius:0.15});
+          slide.addText('🎮 '+(sd.troChoi.ten||''), {x:8.2,y:1.5,w:4.4,h:0.5,fontSize:16,color:'B57D1B',fontFace:'Arial',bold:true});
           let desc = '';
           if (sd.troChoi.moTa) desc += sd.troChoi.moTa+'\n\n';
           if (sd.troChoi.luatChoi) desc += '📏 '+sd.troChoi.luatChoi+'\n\n';
-          if (sd.troChoi.cauHoi) { desc += '📝 Câu hỏi:\n'; sd.troChoi.cauHoi.forEach((c,i)=>{desc+=(i+1)+'. '+c+'\n';}); }
-          if (desc) slide.addText(desc.trim(), { x:8.2,y:2.1,w:4.4,h:3.5, fontSize:11,color:'78350F',fontFace:'Arial',valign:'top',wrap:true,lineSpacing:18 });
+          if (sd.troChoi.cauHoi) { desc += '📝 Câu hỏi:\n'; sd.troChoi.cauHoi.forEach((q,i)=>{desc+=(i+1)+'. '+q+'\n';}); }
+          if (desc) slide.addText(desc.trim(), {x:8.2,y:2.1,w:4.4,h:3.5,fontSize:11,color:'78350F',fontFace:'Arial',valign:'top',wrap:true,lineSpacing:18});
         } else if (sd.hinhAnh) {
-          slide.addShape(pptx.ShapeType.roundRect, { x:8.5,y:1.4,w:4.3,h:3.2, fill:{color:'F0F4FF'}, line:{color:'C7D2FE',width:1,dashType:'dash'}, rectRadius:0.1 });
-          slide.addText('🖼️ Chèn hình:\n'+sd.hinhAnh, { x:8.7,y:1.6,w:3.9,h:2.8, fontSize:10,color:'6B7280',fontFace:'Arial',valign:'middle',align:'center',wrap:true,italic:true });
+          slide.addShape(pptx.ShapeType.roundRect, {x:8.5,y:1.4,w:4.3,h:3.2,fill:{color:'F0F4FF'},line:{color:'C7D2FE',width:1,dashType:'dash'},rectRadius:0.1});
+          slide.addText('🖼️ Chèn hình:\n'+sd.hinhAnh, {x:8.7,y:1.6,w:3.9,h:2.8,fontSize:10,color:'6B7280',fontFace:'Arial',valign:'middle',align:'center',wrap:true,italic:true});
         }
 
-        slide.addShape(pptx.ShapeType.rect, { x:0,y:7.44,w:'100%',h:0.06, fill:{color:colors.accent} });
+        slide.addShape(pptx.ShapeType.rect, {x:0,y:7.44,w:'100%',h:0.06,fill:{color:c.accent}});
       });
 
       const fileName = 'KhoGA_'+removeVietnamese(item.mon)+'_'+item.lop.replace(' ','')+'_'+sanitizeFileName(item.bai);
       pptx.writeFile({ fileName });
-
     } catch(err) {
-      console.error('Lỗi tạo PPTX từ kho:', err);
+      console.error('Lỗi:', err);
       alert('Lỗi tạo file: '+err.message);
     } finally {
       btn.innerHTML = origText;
@@ -2853,259 +2722,8 @@ function downloadKhoLesson(index) {
   }, 100);
 }
 
-// ========================================
-// KHO GIÁO ÁN PPT SẴN — DATA 8 BÀI MẪU
-// ========================================
-
-const KHO_PPTX_DATA = [
-  {
-    id: 'toan1-bai1', mon: 'Toán', lop: 'Lớp 1', bai: 'Bài 1: Các số 0, 1, 2, 3, 4, 5',
-    chuDe: 'Chủ đề 1: Các số từ 0 đến 10', soTiet: 2, icon: '🔢',
-    bgColor: '2563EB',
-    slides: [
-      { slide:1, loai:'bia', tieuDe:'CÁC SỐ 0, 1, 2, 3, 4, 5', noiDung:['Toán — Lớp 1','Kết nối tri thức với cuộc sống'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:'Slide bìa: Giới thiệu tên bài, chào đón học sinh' },
-      { slide:2, loai:'khoidong', tieuDe:'KHỞI ĐỘNG — Đếm cùng bạn!', noiDung:['Cô có mấy quả táo trên bàn?','Cùng đếm theo cô nào: 1... 2... 3...','Bạn nào đếm đúng sẽ được thưởng một ngôi sao!'], hinhAnh:'Hình ảnh rổ táo với 1-5 quả, màu đỏ tươi, nền bàn gỗ', hieuUng:'Hiện từng quả táo khi click', troChoi:{ten:'Đếm và vỗ tay',moTa:'Cô đưa ra hình ảnh, học sinh đếm và vỗ tay số lần tương ứng',luatChoi:'Đếm đúng được 1 sao, sai phải đếm lại',cauHoi:['Có mấy con mèo? (3)','Có mấy bông hoa? (5)','Có mấy quả bóng? (2)']}, ghiChuGV:'Cho HS đếm to, vỗ tay theo' },
-      { slide:3, loai:'kienthuc', tieuDe:'SỐ 1 — MỘT', noiDung:['Số 1 viết là: 1','Đọc là: một','Có 1 con mèo → viết số 1','Có 1 quả táo → viết số 1'], hinhAnh:'Hình minh họa: 1 con mèo dễ thương, bên cạnh là số 1 cỡ lớn màu đỏ', hieuUng:'Fly In từ trái sang phải', troChoi:null, ghiChuGV:'Cho HS giơ 1 ngón tay, đếm 1 vật xung quanh' },
-      { slide:4, loai:'kienthuc', tieuDe:'SỐ 2 VÀ SỐ 3', noiDung:['Số 2 — đọc là: hai','Có 2 con chim → viết số 2','Số 3 — đọc là: ba','Có 3 bông hoa → viết số 3'], hinhAnh:'2 con chim trên cành và 3 bông hoa trong vườn', hieuUng:'Appear lần lượt', troChoi:null, ghiChuGV:'HS lấy que tính bày ra 2, rồi 3 que' },
-      { slide:5, loai:'kienthuc', tieuDe:'SỐ 4 VÀ SỐ 5', noiDung:['Số 4 — đọc là: bốn','Có 4 ngôi sao → viết số 4','Số 5 — đọc là: năm','Có 5 ngón tay → viết số 5'], hinhAnh:'4 ngôi sao vàng và bàn tay xòe 5 ngón', hieuUng:'Zoom In', troChoi:null, ghiChuGV:'HS giơ 4 ngón, rồi 5 ngón' },
-      { slide:6, loai:'kienthuc', tieuDe:'SỐ 0 — KHÔNG CÓ GÌ', noiDung:['Rổ có 3 quả cam → lấy hết ra','Rổ không còn quả nào → viết số 0','Số 0 đọc là: không','0 có nghĩa là không có gì cả'], hinhAnh:'Rổ trống rỗng, trước đó có cam (animation)', hieuUng:'Fade Out cam, hiện số 0 to', troChoi:null, ghiChuGV:'Dùng đồ vật thật để minh họa: lấy hết đi → còn 0' },
-      { slide:7, loai:'luyentap', tieuDe:'LUYỆN TẬP — Đếm và viết số', noiDung:['Đếm số con vật trong mỗi hình','Viết số tương ứng vào ô trống','Em hãy làm bài tập trang 8 SGK'], hinhAnh:'Các nhóm vật: 2 con thỏ, 4 con cá, 0 con chim (lồng trống)', hieuUng:'Click hiện đáp án', troChoi:null, ghiChuGV:'Cho HS làm cá nhân 2 phút, rồi chữa bài chung' },
-      { slide:8, loai:'trochoi', tieuDe:'TRÒ CHƠI — RUNG CHUÔNG VÀNG', noiDung:['Cô đưa ra hình ảnh','Em đếm và giơ thẻ số đúng','Ai nhanh nhất được rung chuông!'], hinhAnh:'Chuông vàng lớn ở giữa slide', hieuUng:'Tiếng chuông khi HS trả lời đúng', troChoi:{ten:'Rung chuông vàng',moTa:'Giáo viên chiếu hình, học sinh giơ thẻ số. Ai đúng và nhanh nhất được rung chuông.',luatChoi:'5 câu hỏi, mỗi câu 10 giây, giơ thẻ số đúng',cauHoi:['Có mấy quả bóng? (3)','Có mấy con bướm? (5)','Có mấy chiếc ô tô? (1)','Có mấy cái kẹo? (4)','Rổ trống có mấy quả? (0)']}, ghiChuGV:'Chuẩn bị thẻ số 0-5 cho mỗi HS' },
-      { slide:9, loai:'vandung', tieuDe:'VẬN DỤNG — Đếm quanh em', noiDung:['Về nhà, em hãy đếm:','Nhà em có mấy cái ghế?','Em có mấy quyển vở?','Trong phòng có mấy cửa sổ?'], hinhAnh:'Hình phòng khách gia đình, ấm cúng', hieuUng:null, troChoi:null, ghiChuGV:'Giao bài về nhà, dặn HS kể cho bố mẹ nghe' },
-      { slide:10, loai:'tongket', tieuDe:'BÀI HỌC HÔM NAY', noiDung:['Em đã biết các số: 0, 1, 2, 3, 4, 5','Em biết đếm và viết các số này','Em giỏi lắm! Hẹn gặp lại bài sau!'], hinhAnh:null, hieuUng:'Confetti animation', troChoi:null, ghiChuGV:'Tuyên dương HS tích cực, phát sao thưởng' }
-    ]
-  },
-  {
-    id: 'toan1-bai10', mon: 'Toán', lop: 'Lớp 1', bai: 'Bài 10: Phép cộng trong phạm vi 10',
-    chuDe: 'Chủ đề 3: Phép cộng, phép trừ trong phạm vi 10', soTiet: 4, icon: '➕',
-    bgColor: '059669',
-    slides: [
-      { slide:1, loai:'bia', tieuDe:'PHÉP CỘNG TRONG PHẠM VI 10', noiDung:['Toán — Lớp 1','Kết nối tri thức với cuộc sống'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:null },
-      { slide:2, loai:'khoidong', tieuDe:'KHỞI ĐỘNG — Câu chuyện của Thỏ', noiDung:['Thỏ có 2 củ cà rốt','Mẹ cho thêm 3 củ nữa','Hỏi: Thỏ có tất cả mấy củ cà rốt?'], hinhAnh:'Chú thỏ cầm cà rốt, hoạt hình dễ thương', hieuUng:'Animation thỏ nhận thêm cà rốt', troChoi:null, ghiChuGV:'Kể chuyện hấp dẫn, để HS tự trả lời' },
-      { slide:3, loai:'kienthuc', tieuDe:'PHÉP CỘNG LÀ GÌ?', noiDung:['Gộp 2 nhóm lại với nhau → phép cộng','Dấu cộng viết là: +','2 + 3 = 5','Đọc là: hai cộng ba bằng năm'], hinhAnh:'2 quả táo + 3 quả táo = 5 quả táo (minh họa trực quan)', hieuUng:'Hai nhóm táo di chuyển gộp lại', troChoi:null, ghiChuGV:'Dùng que tính minh họa: gộp 2 nhóm' },
-      { slide:4, loai:'kienthuc', tieuDe:'CỘNG VỚI SỐ 0', noiDung:['5 + 0 = ?','Có 5 viên bi, thêm 0 viên → vẫn là 5','5 + 0 = 5','Cộng với 0 → giữ nguyên'], hinhAnh:'5 viên bi màu sắc, không thêm gì', hieuUng:null, troChoi:null, ghiChuGV:'Nhấn mạnh: cộng 0 kết quả không đổi' },
-      { slide:5, loai:'vitduminhoa', tieuDe:'VÍ DỤ THỰC TẾ', noiDung:['Trên bàn có 4 cái bút','Cô để thêm 2 cái nữa','4 + 2 = 6 (cái bút)','Em thử tìm ví dụ khác nào!'], hinhAnh:'Bàn học với bút chì, bút màu', hieuUng:'Bút xuất hiện từng cái', troChoi:null, ghiChuGV:'Cho HS tự nghĩ ví dụ phép cộng trong lớp' },
-      { slide:6, loai:'luyentap', tieuDe:'LUYỆN TẬP — Tính nhẩm', noiDung:['1 + 4 = ?','3 + 3 = ?','6 + 2 = ?','5 + 5 = ?'], hinhAnh:'Bảng phép tính với ô trống, nền xanh lá nhạt', hieuUng:'Click hiện đáp án từng câu', troChoi:null, ghiChuGV:'Cho HS giơ bảng con ghi đáp án' },
-      { slide:7, loai:'trochoi', tieuDe:'TRÒ CHƠI — AI NHANH HƠN', noiDung:['2 đội thi đua','Mỗi đội cử 1 bạn lên bảng','Giải phép tính, đội nào nhanh hơn thắng!'], hinhAnh:'2 cột thi đua với ngôi sao', hieuUng:'Đồng hồ đếm ngược 15 giây', troChoi:{ten:'Ai nhanh hơn',moTa:'2 đội thi giải phép cộng, đội nào nhanh và đúng thắng',luatChoi:'Mỗi lượt 1 phép tính, 15 giây, đúng +10 điểm',cauHoi:['3 + 4 = ? (7)','1 + 6 = ? (7)','2 + 5 = ? (7)','8 + 2 = ? (10)','4 + 4 = ? (8)']}, ghiChuGV:'Chia lớp 2 đội, thi đua sôi nổi' },
-      { slide:8, loai:'trochoi', tieuDe:'TRÒ CHƠI — NỐI CẶP ĐÔI', noiDung:['Nối phép tính với kết quả đúng','Cột A: phép tính','Cột B: kết quả'], hinhAnh:'2 cột nối, đường nối nhiều màu', hieuUng:'Kéo thả hoặc click nối', troChoi:{ten:'Nối cặp đôi',moTa:'Học sinh nối phép tính bên trái với kết quả đúng bên phải',luatChoi:'6 phép tính, ai nối đúng và nhanh nhất thắng',cauHoi:['2+3 → 5','1+1 → 2','4+3 → 7','5+4 → 9','6+1 → 7','3+3 → 6']}, ghiChuGV:'In phiếu bài tập nối, phát cho HS' },
-      { slide:9, loai:'vandung', tieuDe:'VẬN DỤNG', noiDung:['Mẹ mua 3 quả cam và 4 quả táo','Hỏi mẹ mua tất cả bao nhiêu quả?','Viết phép tính: 3 + 4 = 7'], hinhAnh:'Giỏ hoa quả nhiều màu sắc', hieuUng:null, troChoi:null, ghiChuGV:'Giao bài tập về nhà trang 28 SGK' },
-      { slide:10, loai:'tongket', tieuDe:'GHI NHỚ', noiDung:['Phép cộng = gộp lại','Dấu + nghĩa là thêm vào','Cộng với 0 → giữ nguyên','Các em giỏi lắm!'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:'Nhắc HS ôn bảng cộng ở nhà' }
-    ]
-  },
-  {
-    id: 'toan2-bai37', mon: 'Toán', lop: 'Lớp 2', bai: 'Bài 37: Phép nhân',
-    chuDe: 'Chủ đề 8: Phép nhân, phép chia', soTiet: 2, icon: '✖️',
-    bgColor: '7C3AED',
-    slides: [
-      { slide:1, loai:'bia', tieuDe:'PHÉP NHÂN', noiDung:['Toán — Lớp 2','Kết nối tri thức với cuộc sống'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:null },
-      { slide:2, loai:'khoidong', tieuDe:'KHỞI ĐỘNG — Chia kẹo', noiDung:['Cô có 4 túi kẹo','Mỗi túi có 2 cái kẹo','Hỏi: Cô có tất cả bao nhiêu cái kẹo?','Cùng đếm nào: 2, 4, 6, 8!'], hinhAnh:'4 túi kẹo nhiều màu, mỗi túi 2 viên', hieuUng:'Mở từng túi, hiện kẹo bên trong', troChoi:null, ghiChuGV:'Dùng kẹo thật nếu có, cho HS đếm' },
-      { slide:3, loai:'kienthuc', tieuDe:'PHÉP NHÂN LÀ GÌ?', noiDung:['2 + 2 + 2 + 2 = 8','Có 4 nhóm, mỗi nhóm 2 → cộng liên tiếp','Viết gọn: 2 × 4 = 8','Đọc: hai nhân bốn bằng tám'], hinhAnh:'4 nhóm x 2 vật, gom lại = 8, dấu × lớn màu tím', hieuUng:'Biến đổi từ phép cộng sang phép nhân', troChoi:null, ghiChuGV:'Nhấn mạnh: nhân = cộng liên tiếp các số giống nhau' },
-      { slide:4, loai:'kienthuc', tieuDe:'CÁC THÀNH PHẦN CỦA PHÉP NHÂN', noiDung:['2 × 4 = 8','2 là thừa số','4 là thừa số','8 là tích'], hinhAnh:'Sơ đồ mũi tên chỉ vào từng thành phần, màu sắc khác nhau', hieuUng:'Highlight từng thành phần khi click', troChoi:null, ghiChuGV:'Ghi bảng, cho HS nhắc lại nhiều lần' },
-      { slide:5, loai:'vitduminhoa', tieuDe:'VÍ DỤ', noiDung:['Mỗi bàn có 5 học sinh, có 3 bàn','5 + 5 + 5 = 15','Viết gọn: 5 × 3 = 15','5 được cộng 3 lần → 5 nhân 3'], hinhAnh:'3 bàn học, mỗi bàn 5 HS ngồi gọn gàng', hieuUng:null, troChoi:null, ghiChuGV:'Lấy ví dụ ngay trong lớp, HS đếm thật' },
-      { slide:6, loai:'luyentap', tieuDe:'LUYỆN TẬP — Viết phép nhân', noiDung:['Viết phép nhân từ phép cộng:','3 + 3 + 3 = ? → 3 × ? = ?','4 + 4 + 4 + 4 + 4 = ? → 4 × ? = ?','Bài tập SGK trang 88'], hinhAnh:null, hieuUng:'Click hiện đáp án', troChoi:null, ghiChuGV:'Cho HS làm bảng con, giơ bảng kiểm tra' },
-      { slide:7, loai:'trochoi', tieuDe:'TRÒ CHƠI — VÒNG QUAY MAY MẮN', noiDung:['Quay vòng quay, trả lời phép tính','Đúng: nhận ngôi sao','Sai: nhường lượt cho bạn khác'], hinhAnh:'Vòng quay nhiều màu sắc với các ô phép tính', hieuUng:'Vòng quay xoay, dừng ở ô ngẫu nhiên', troChoi:{ten:'Vòng quay may mắn',moTa:'Quay vòng quay, trả lời phép tính trong ô. Đúng được sao, sai nhường lượt.',luatChoi:'Mỗi lượt 1 HS, quay và trả lời, đúng +1 sao',cauHoi:['2+2+2 = 2×? (3, tích=6)','5+5 = 5×? (2, tích=10)','3+3+3+3 = 3×? (4, tích=12)','4+4+4 = 4×? (3, tích=12)']}, ghiChuGV:'Có thể dùng vòng quay online hoặc bìa cứng' },
-      { slide:8, loai:'vandung', tieuDe:'VẬN DỤNG', noiDung:['Mẹ xếp trứng vào 3 hộp','Mỗi hộp có 6 quả trứng','Viết phép nhân tính tổng số trứng','6 × 3 = 18 (quả trứng)'], hinhAnh:'3 hộp trứng gà, sắp gọn gàng', hieuUng:null, troChoi:null, ghiChuGV:'Bài tập về nhà: tìm phép nhân xung quanh em' },
-      { slide:9, loai:'tongket', tieuDe:'GHI NHỚ', noiDung:['Phép nhân = cộng liên tiếp số giống nhau','Kí hiệu: ×','Kết quả phép nhân gọi là tích','Tuần sau: Bảng nhân 2!'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:null }
-    ]
-  },
-  {
-    id: 'toan3-bai5', mon: 'Toán', lop: 'Lớp 3', bai: 'Bài 5: Bảng nhân 3, bảng chia 3',
-    chuDe: 'Chủ đề 1: Ôn tập và bổ sung', soTiet: 2, icon: '🔢',
-    bgColor: 'DC2626',
-    slides: [
-      { slide:1, loai:'bia', tieuDe:'BẢNG NHÂN 3, BẢNG CHIA 3', noiDung:['Toán — Lớp 3','Kết nối tri thức với cuộc sống'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:null },
-      { slide:2, loai:'khoidong', tieuDe:'KHỞI ĐỘNG — Ôn bảng nhân 2', noiDung:['Đọc thuộc lòng bảng nhân 2','2×1=2, 2×2=4, 2×3=6...','Bạn nào đọc nhanh nhất?'], hinhAnh:'Bảng nhân 2 với nền cầu vồng', hieuUng:null, troChoi:{ten:'Đọc bảng nhân tiếp sức',moTa:'Mỗi HS đọc 1 phép tính, tiếp nối nhau',luatChoi:'Đọc sai hoặc ngập ngừng phải đọc lại từ đầu',cauHoi:['2×4=?','2×7=?','2×9=?']}, ghiChuGV:'Kiểm tra nhanh bảng nhân 2 trước khi vào bài mới' },
-      { slide:3, loai:'kienthuc', tieuDe:'LẬP BẢNG NHÂN 3', noiDung:['3 × 1 = 3','3 × 2 = 3 + 3 = 6','3 × 3 = 3 + 3 + 3 = 9','3 × 4 = 3 + 3 + 3 + 3 = 12'], hinhAnh:'Mỗi phép tính kèm nhóm 3 vật (hoa, sao, bi)', hieuUng:'Hiện từng dòng khi click', troChoi:null, ghiChuGV:'Cho HS tự tính dựa trên phép cộng' },
-      { slide:4, loai:'kienthuc', tieuDe:'BẢNG NHÂN 3 ĐẦY ĐỦ', noiDung:['3×1=3  |  3×6=18','3×2=6  |  3×7=21','3×3=9  |  3×8=24','3×4=12 |  3×9=27','3×5=15 |  3×10=30'], hinhAnh:'Bảng 2 cột, nền vàng nhạt, chữ to rõ ràng', hieuUng:null, troChoi:null, ghiChuGV:'Cho cả lớp đọc đồng thanh 2-3 lần' },
-      { slide:5, loai:'kienthuc', tieuDe:'BẢNG CHIA 3', noiDung:['3 ÷ 3 = 1 (vì 3×1=3)','6 ÷ 3 = 2 (vì 3×2=6)','9 ÷ 3 = 3 (vì 3×3=9)','Chia 3 = ngược lại nhân 3!'], hinhAnh:'Chia 12 ngôi sao thành 3 nhóm đều nhau → mỗi nhóm 4', hieuUng:'Animation chia nhóm vật', troChoi:null, ghiChuGV:'Liên hệ: biết nhân → suy ra chia' },
-      { slide:6, loai:'luyentap', tieuDe:'LUYỆN TẬP', noiDung:['Tính nhẩm:','3 × 7 = ?','21 ÷ 3 = ?','3 × 9 = ?','27 ÷ 3 = ?'], hinhAnh:null, hieuUng:'Click hiện đáp án', troChoi:null, ghiChuGV:'Dùng bảng con, giơ đáp án' },
-      { slide:7, loai:'trochoi', tieuDe:'TRÒ CHƠI — ĐƯỜNG ĐUA TRI THỨC', noiDung:['3 đội thi đua chạy về đích','Trả lời đúng → tiến 1 bước','Đội nào về đích trước thắng!'], hinhAnh:'3 đường chạy với nhân vật hoạt hình', hieuUng:'Nhân vật di chuyển khi đúng', troChoi:{ten:'Đường đua tri thức',moTa:'3 đội thi trả lời phép tính nhân 3, chia 3. Đúng tiến 1 bước.',luatChoi:'Mỗi đội cử đại diện, 10 câu hỏi, 10 giây/câu',cauHoi:['3×5=? (15)','18÷3=? (6)','3×8=? (24)','30÷3=? (10)','3×6=? (18)']}, ghiChuGV:'Chia 3 đội, cổ vũ sôi nổi' },
-      { slide:8, loai:'vandung', tieuDe:'VẬN DỤNG', noiDung:['Mỗi bàn xếp 3 cái ghế','Lớp có 8 bàn','Hỏi: Có tất cả bao nhiêu ghế?','3 × 8 = 24 (cái ghế)'], hinhAnh:'Lớp học sạch đẹp với bàn ghế ngay ngắn', hieuUng:null, troChoi:null, ghiChuGV:'Cho HS đếm ghế thật trong lớp' },
-      { slide:9, loai:'tongket', tieuDe:'VỀ NHÀ NHỚ HỌC THUỘC!', noiDung:['Bảng nhân 3: 3×1=3 đến 3×10=30','Bảng chia 3: 3÷3=1 đến 30÷3=10','Đọc thuộc lòng mỗi ngày!'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:'Nhắc phụ huynh kiểm tra HS đọc bảng nhân' }
-    ]
-  },
-  {
-    id: 'toan3-bai50', mon: 'Toán', lop: 'Lớp 3', bai: 'Bài 50: Chu vi hình tam giác, hình tứ giác, hình chữ nhật, hình vuông',
-    chuDe: 'Chủ đề 9: Chu vi, diện tích', soTiet: 3, icon: '📐',
-    bgColor: 'D97706',
-    slides: [
-      { slide:1, loai:'bia', tieuDe:'CHU VI CÁC HÌNH', noiDung:['Toán — Lớp 3','Hình tam giác, hình tứ giác, HCN, HV'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:null },
-      { slide:2, loai:'khoidong', tieuDe:'KHỞI ĐỘNG — Con kiến đi dạo', noiDung:['Con kiến bò dọc theo mép bàn','Kiến đi hết 1 vòng quanh mép','Quãng đường kiến bò = CHU VI!'], hinhAnh:'Con kiến hoạt hình bò quanh hình chữ nhật', hieuUng:'Animation kiến di chuyển theo cạnh', troChoi:null, ghiChuGV:'Dùng animation để HS hình dung "đi vòng quanh"' },
-      { slide:3, loai:'kienthuc', tieuDe:'CHU VI LÀ GÌ?', noiDung:['Chu vi = tổng độ dài các cạnh','Đi hết 1 vòng quanh hình','Đo bằng cm, m, mm,...'], hinhAnh:'Hình tam giác với 3 cạnh được tô sáng lần lượt', hieuUng:'Tô sáng từng cạnh → gộp lại', troChoi:null, ghiChuGV:'Cho HS dùng thước đo cạnh bàn' },
-      { slide:4, loai:'kienthuc', tieuDe:'CHU VI HÌNH TAM GIÁC', noiDung:['Tam giác có 3 cạnh: a, b, c','Chu vi = a + b + c','Ví dụ: cạnh 3cm, 4cm, 5cm','P = 3 + 4 + 5 = 12 cm'], hinhAnh:'Tam giác lớn với số đo trên mỗi cạnh', hieuUng:null, troChoi:null, ghiChuGV:'P là kí hiệu chu vi (viết lên bảng)' },
-      { slide:5, loai:'kienthuc', tieuDe:'CHU VI HÌNH CHỮ NHẬT', noiDung:['HCN có 2 cạnh dài, 2 cạnh ngắn','Chu vi = (dài + rộng) × 2','Ví dụ: dài 6cm, rộng 4cm','P = (6 + 4) × 2 = 20 cm'], hinhAnh:'HCN xanh dương với số đo, công thức bên cạnh', hieuUng:null, troChoi:null, ghiChuGV:'Nhấn mạnh: nhân 2 vì có 2 cặp cạnh bằng nhau' },
-      { slide:6, loai:'kienthuc', tieuDe:'CHU VI HÌNH VUÔNG', noiDung:['Hình vuông: 4 cạnh bằng nhau','Chu vi = cạnh × 4','Ví dụ: cạnh 5cm','P = 5 × 4 = 20 cm'], hinhAnh:'Hình vuông đỏ với cạnh 5cm, 4 cạnh bằng nhau', hieuUng:null, troChoi:null, ghiChuGV:'So sánh: HV là trường hợp đặc biệt của HCN' },
-      { slide:7, loai:'luyentap', tieuDe:'LUYỆN TẬP', noiDung:['Tính chu vi hình chữ nhật: dài 8cm, rộng 3cm','Tính chu vi hình vuông: cạnh 7cm','SGK bài tập trang 117'], hinhAnh:null, hieuUng:'Click hiện lời giải', troChoi:null, ghiChuGV:'Cho HS tự làm 3 phút, chữa bài' },
-      { slide:8, loai:'trochoi', tieuDe:'TRÒ CHƠI — ĐO VÀ TÍNH', noiDung:['Mỗi nhóm nhận 1 tấm bìa','Đo các cạnh bằng thước kẻ','Tính chu vi, ghi vào phiếu'], hinhAnh:'Nhóm HS cầm thước đo, phiếu bài tập', hieuUng:null, troChoi:{ten:'Đo và tính',moTa:'Mỗi nhóm nhận hình bìa cứng (tam giác, HCN, HV), đo cạnh và tính chu vi',luatChoi:'4 nhóm, mỗi nhóm 2 hình, 5 phút, nhóm nào đúng và nhanh nhất thắng',cauHoi:['Đo tam giác bìa cứng → tính P','Đo HCN sách vở → tính P','Đo HV gạch lát sàn → tính P']}, ghiChuGV:'Chuẩn bị bìa cứng cắt sẵn các hình' },
-      { slide:9, loai:'vandung', tieuDe:'VẬN DỤNG THỰC TẾ', noiDung:['Tính chu vi mặt bàn học của em','Tính chu vi quyển sách Toán','Bố muốn rào vườn HCN dài 10m, rộng 6m. Cần bao nhiêu mét rào?'], hinhAnh:'Vườn rau hình chữ nhật, hàng rào gỗ', hieuUng:null, troChoi:null, ghiChuGV:null },
-      { slide:10, loai:'tongket', tieuDe:'CÔNG THỨC GHI NHỚ', noiDung:['Chu vi tam giác: P = a + b + c','Chu vi HCN: P = (dài + rộng) × 2','Chu vi HV: P = cạnh × 4','Đơn vị: cm, m, mm,...'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:'Cho HS ghi vở, đọc lại 2 lần' }
-    ]
-  },
-  {
-    id: 'toan4-bai53', mon: 'Toán', lop: 'Lớp 4', bai: 'Bài 53: Khái niệm phân số',
-    chuDe: 'Chủ đề 10: Phân số', soTiet: 2, icon: '🍕',
-    bgColor: '1A56DB',
-    slides: [
-      { slide:1, loai:'bia', tieuDe:'KHÁI NIỆM PHÂN SỐ', noiDung:['Toán — Lớp 4','Kết nối tri thức với cuộc sống'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:null },
-      { slide:2, loai:'khoidong', tieuDe:'KHỞI ĐỘNG — Chia pizza', noiDung:['Cô có 1 cái pizza','Chia đều cho 4 bạn','Mỗi bạn được mấy phần?','Mỗi bạn được 1 phần 4!'], hinhAnh:'Pizza tròn được chia 4 phần đều, tô 1 phần', hieuUng:'Animation cắt pizza', troChoi:null, ghiChuGV:'Dùng hình tròn bằng giấy, gấp 4, cắt thật' },
-      { slide:3, loai:'kienthuc', tieuDe:'PHÂN SỐ LÀ GÌ?', noiDung:['Chia 1 cái bánh thành 4 phần bằng nhau','Lấy 1 phần → viết: 1/4','1 gọi là TỬ SỐ (phần được lấy)','4 gọi là MẪU SỐ (tổng số phần chia)'], hinhAnh:'Hình tròn chia 4, tô 1 phần, mũi tên chỉ tử số và mẫu số', hieuUng:'Highlight tử số (trên) và mẫu số (dưới) bằng 2 màu', troChoi:null, ghiChuGV:'Nhấn mạnh: mẫu số ở dưới, tử số ở trên' },
-      { slide:4, loai:'kienthuc', tieuDe:'ĐỌC VÀ VIẾT PHÂN SỐ', noiDung:['1/4 đọc là: một phần tư','3/4 đọc là: ba phần tư','2/5 đọc là: hai phần năm','Tử số đọc trước, mẫu số đọc sau'], hinhAnh:'Các hình tròn/vuông chia phần, tô màu tương ứng', hieuUng:null, troChoi:null, ghiChuGV:'Cho HS đọc nhiều phân số khác nhau' },
-      { slide:5, loai:'vitduminhoa', tieuDe:'VÍ DỤ THỰC TẾ', noiDung:['Thanh sôcôla chia 8 phần, An ăn 3 phần → 3/8','Lớp có 30 HS, 15 bạn nữ → 15/30','Chai nước đầy, uống 1/2 → còn 1/2'], hinhAnh:'Thanh sôcôla chia ô, tô 3 ô', hieuUng:null, troChoi:null, ghiChuGV:'Lấy ví dụ gần gũi với HS' },
-      { slide:6, loai:'luyentap', tieuDe:'LUYỆN TẬP', noiDung:['Viết phân số chỉ phần tô màu','Hình tròn chia 6, tô 2 phần → ?/6','Hình vuông chia 9, tô 5 phần → ?/9','SGK bài tập trang 118'], hinhAnh:'Các hình chia phần với phần tô màu', hieuUng:'Click hiện đáp án', troChoi:null, ghiChuGV:'Làm cá nhân, chữa bài bảng lớp' },
-      { slide:7, loai:'trochoi', tieuDe:'TRÒ CHƠI — ĐÚNG hay SAI?', noiDung:['Cô đưa ra khẳng định','Em giơ thẻ ĐÚNG hoặc SAI'], hinhAnh:'Thẻ xanh (ĐÚNG) và đỏ (SAI)', hieuUng:'Hiện kết quả, vỗ tay nếu đúng', troChoi:{ten:'Đúng hay Sai',moTa:'Giáo viên đọc khẳng định về phân số, HS giơ thẻ Đúng/Sai',luatChoi:'10 câu, giơ thẻ trong 5 giây, đúng +1 điểm',cauHoi:['Trong 2/5, số 2 là mẫu số (SAI)','3/4 đọc là ba phần tư (ĐÚNG)','Trong 7/10, mẫu số là 10 (ĐÚNG)','1/3 nghĩa là chia 1 phần thành 3 (SAI — chia thành 3, lấy 1)','Phân số luôn nhỏ hơn 1 (SAI)']}, ghiChuGV:'Chuẩn bị thẻ Đ/S cho mỗi HS' },
-      { slide:8, loai:'vandung', tieuDe:'VẬN DỤNG', noiDung:['Gấp tờ giấy A4 thành 8 phần bằng nhau','Tô màu 3 phần → viết phân số 3/8','Tô tiếp 2 phần → bây giờ tô mấy phần? (5/8)'], hinhAnh:'Tờ giấy gấp, tô màu từng phần', hieuUng:null, troChoi:null, ghiChuGV:'Phát giấy A4, cho HS thực hành gấp và tô' },
-      { slide:9, loai:'tongket', tieuDe:'GHI NHỚ', noiDung:['Phân số gồm: Tử số (trên) và Mẫu số (dưới)','Mẫu số: tổng số phần chia đều','Tử số: số phần được lấy','Viết: Tử số / Mẫu số'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:'Bài sau: Phân số và phép chia' }
-    ]
-  },
-  {
-    id: 'toan4-bai25', mon: 'Toán', lop: 'Lớp 4', bai: 'Bài 25: Tìm hai số biết tổng và hiệu của hai số đó',
-    chuDe: 'Chủ đề 5: Phép cộng và phép trừ', soTiet: 2, icon: '🧩',
-    bgColor: '0891B2',
-    slides: [
-      { slide:1, loai:'bia', tieuDe:'TÌM HAI SỐ BIẾT TỔNG VÀ HIỆU', noiDung:['Toán — Lớp 4','Kết nối tri thức với cuộc sống'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:null },
-      { slide:2, loai:'khoidong', tieuDe:'KHỞI ĐỘNG — Bài toán vui', noiDung:['An và Bình có tất cả 20 viên bi','An nhiều hơn Bình 4 viên','Hỏi mỗi bạn có bao nhiêu viên bi?','Em thử đoán xem!'], hinhAnh:'2 bạn nhỏ với rổ bi nhiều màu', hieuUng:null, troChoi:null, ghiChuGV:'Để HS thử đoán, chưa dạy cách giải' },
-      { slide:3, loai:'kienthuc', tieuDe:'CÁCH GIẢI — SƠ ĐỒ ĐOẠN THẲNG', noiDung:['Vẽ sơ đồ 2 đoạn thẳng','An: ——————————','Bình: ————————','Phần hơn = hiệu, tổng cả 2 = tổng'], hinhAnh:'Sơ đồ đoạn thẳng rõ ràng, tô màu phần hơn', hieuUng:'Vẽ từng bước, tô phần hơn', troChoi:null, ghiChuGV:'Vẽ sơ đồ lên bảng, từ từ phân tích' },
-      { slide:4, loai:'kienthuc', tieuDe:'CÔNG THỨC', noiDung:['Số lớn = (Tổng + Hiệu) ÷ 2','Số bé = (Tổng - Hiệu) ÷ 2','Ví dụ: Tổng = 20, Hiệu = 4','Số lớn = (20+4)÷2 = 12','Số bé = (20-4)÷2 = 8'], hinhAnh:'Công thức trong khung nổi bật, nền vàng', hieuUng:'Highlight từng bước tính', troChoi:null, ghiChuGV:'Cho HS thử thế số: 12+8=20 ✓, 12-8=4 ✓' },
-      { slide:5, loai:'vitduminhoa', tieuDe:'VÍ DỤ 2', noiDung:['Hai thùng gạo: tổng 70kg, hiệu 10kg','Thùng lớn: (70+10)÷2 = 40kg','Thùng bé: (70-10)÷2 = 30kg','Thử lại: 40+30=70 ✓, 40-30=10 ✓'], hinhAnh:'2 thùng gạo to nhỏ khác nhau', hieuUng:null, troChoi:null, ghiChuGV:'Nhấn mạnh bước thử lại (kiểm tra)' },
-      { slide:6, loai:'luyentap', tieuDe:'LUYỆN TẬP', noiDung:['Bài 1: Tổng 50, Hiệu 14. Tìm 2 số?','Bài 2: Tổng 86, Hiệu 22. Tìm 2 số?','Bài 3: Hai lớp có 72 HS, lớp A hơn lớp B 8 HS. Mỗi lớp?'], hinhAnh:null, hieuUng:'Click hiện đáp án', troChoi:null, ghiChuGV:'Cho HS làm cặp đôi, 5 phút' },
-      { slide:7, loai:'trochoi', tieuDe:'TRÒ CHƠI — AI GIẢI NHANH HƠN', noiDung:['3 nhóm thi giải bài toán','Nhóm nào xong trước và đúng → thắng!'], hinhAnh:'3 đội với bảng thi đua', hieuUng:'Đồng hồ đếm ngược', troChoi:{ten:'Ai giải nhanh hơn',moTa:'3 nhóm thi giải bài toán tìm 2 số biết tổng và hiệu',luatChoi:'Mỗi nhóm 1 đề, 3 phút, giải đúng và nhanh nhất thắng',cauHoi:['Tổng 100, Hiệu 20 → (60, 40)','Tổng 46, Hiệu 8 → (27, 19)','Tổng 64, Hiệu 12 → (38, 26)']}, ghiChuGV:'Phát phiếu bài cho mỗi nhóm' },
-      { slide:8, loai:'vandung', tieuDe:'VẬN DỤNG', noiDung:['Tuổi bố và tuổi con cộng lại được 52','Bố hơn con 28 tuổi','Hỏi bố bao nhiêu tuổi? Con bao nhiêu tuổi?','Bố: (52+28)÷2 = 40 tuổi','Con: (52-28)÷2 = 12 tuổi'], hinhAnh:'Hình bố và con đi dạo', hieuUng:null, troChoi:null, ghiChuGV:'Bài tập về nhà SGK trang 73' },
-      { slide:9, loai:'tongket', tieuDe:'CÔNG THỨC QUAN TRỌNG', noiDung:['Số LỚN = (Tổng + Hiệu) ÷ 2','Số BÉ = (Tổng – Hiệu) ÷ 2','Luôn THỬ LẠI kết quả!'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:'Cho HS ghi công thức vào vở, khoanh đỏ' }
-    ]
-  },
-  {
-    id: 'toan5-bai27', mon: 'Toán', lop: 'Lớp 5', bai: 'Bài 27: Đường tròn. Chu vi và diện tích hình tròn',
-    chuDe: 'Chủ đề 5: Một số hình phẳng. Chu vi và diện tích', soTiet: 4, icon: '⭕',
-    bgColor: 'BE185D',
-    slides: [
-      { slide:1, loai:'bia', tieuDe:'ĐƯỜNG TRÒN — CHU VI VÀ DIỆN TÍCH HÌNH TRÒN', noiDung:['Toán — Lớp 5','Kết nối tri thức với cuộc sống'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:null },
-      { slide:2, loai:'khoidong', tieuDe:'KHỞI ĐỘNG — Hình tròn quanh ta', noiDung:['Kể tên các vật hình tròn quanh em','Đồng hồ, bánh xe, nắp chai, đĩa...','Tại sao bánh xe phải hình tròn?'], hinhAnh:'Collage các vật hình tròn trong cuộc sống', hieuUng:null, troChoi:null, ghiChuGV:'Cho HS tự kể, tạo hứng thú' },
-      { slide:3, loai:'kienthuc', tieuDe:'CÁC YẾU TỐ CỦA HÌNH TRÒN', noiDung:['Tâm O: điểm chính giữa','Bán kính r: từ tâm đến mép','Đường kính d: đi qua tâm, d = 2 × r','Chu vi: đường bao quanh hình tròn'], hinhAnh:'Hình tròn lớn với O, r, d được đánh dấu rõ ràng bằng màu sắc', hieuUng:'Highlight từng yếu tố khi click', troChoi:null, ghiChuGV:'Dùng compa vẽ trên bảng, chỉ rõ tâm, bán kính' },
-      { slide:4, loai:'kienthuc', tieuDe:'SỐ PI (π)', noiDung:['π (pi) ≈ 3,14','π = Chu vi ÷ Đường kính','π là hằng số, không đổi','Nhớ: 3 phẩy 14!'], hinhAnh:'Chữ π lớn, nền gradient, ≈ 3,14159...', hieuUng:'Zoom In π', troChoi:null, ghiChuGV:'Cho HS đo chu vi và đường kính vật tròn, chia → gần 3,14' },
-      { slide:5, loai:'kienthuc', tieuDe:'CÔNG THỨC CHU VI HÌNH TRÒN', noiDung:['C = d × π = d × 3,14','Hoặc: C = 2 × r × π = 2 × r × 3,14','Ví dụ: r = 5cm','C = 2 × 5 × 3,14 = 31,4 cm'], hinhAnh:'Công thức trong khung, hình tròn kèm số đo', hieuUng:null, troChoi:null, ghiChuGV:'Ghi công thức lên bảng, cho HS chép vào vở' },
-      { slide:6, loai:'kienthuc', tieuDe:'CÔNG THỨC DIỆN TÍCH HÌNH TRÒN', noiDung:['S = r × r × π = r² × 3,14','Ví dụ: r = 4cm','S = 4 × 4 × 3,14 = 50,24 cm²','Nhớ: bán kính nhân bán kính nhân 3,14'], hinhAnh:'Hình tròn tô kín diện tích, công thức nổi bật', hieuUng:'Tô dần diện tích từ tâm ra', troChoi:null, ghiChuGV:'Phân biệt: chu vi = vòng ngoài, diện tích = phần bên trong' },
-      { slide:7, loai:'luyentap', tieuDe:'LUYỆN TẬP', noiDung:['Tính chu vi HT có d = 10cm','Tính diện tích HT có r = 7cm','Bánh xe đạp có d = 60cm, tính chu vi'], hinhAnh:null, hieuUng:'Click hiện lời giải', troChoi:null, ghiChuGV:'Cho HS tính bằng nháp, kiểm tra bảng con' },
-      { slide:8, loai:'trochoi', tieuDe:'TRÒ CHƠI — RUNG CHUÔNG VÀNG', noiDung:['Trả lời nhanh các phép tính','Đúng: tiến 1 bậc','3 lần đúng liên tiếp: RUNG CHUÔNG!'], hinhAnh:'Chuông vàng lớn, bậc thang', hieuUng:'Tiếng chuông vàng', troChoi:{ten:'Rung chuông vàng',moTa:'HS giơ bảng con trả lời, đúng tiến 1 bậc, đủ 3 bậc rung chuông',luatChoi:'Cá nhân, 8 câu, 20 giây/câu, viết đáp án bảng con',cauHoi:['C HT có d=6cm? (18,84cm)','S HT có r=3cm? (28,26cm²)','r=10cm, C=? (62,8cm)','d=14cm, r=? (7cm)','S HT có r=5cm? (78,5cm²)']}, ghiChuGV:'Cho tính nhẩm hoặc nháp nhanh' },
-      { slide:9, loai:'vandung', tieuDe:'VẬN DỤNG THỰC TẾ', noiDung:['Bể cá hình tròn có d = 80cm','Tính chu vi bể cá: C = 80 × 3,14 = 251,2cm','Muốn quây viền trang trí quanh bể cần 251,2cm dây'], hinhAnh:'Bể cá tròn đẹp với cá vàng', hieuUng:null, troChoi:null, ghiChuGV:'Bài tập về nhà: Đo nắp nồi, tính C và S' },
-      { slide:10, loai:'tongket', tieuDe:'CÔNG THỨC GHI NHỚ', noiDung:['Chu vi: C = d × 3,14 = 2 × r × 3,14','Diện tích: S = r × r × 3,14','Luôn nhớ: π ≈ 3,14','d = 2 × r và r = d ÷ 2'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:'Kiểm tra HS thuộc công thức tuần sau' }
-    ]
-  },
-  {
-    id: 'toan5-bai10', mon: 'Toán', lop: 'Lớp 5', bai: 'Bài 10: Khái niệm số thập phân',
-    chuDe: 'Chủ đề 2: Số thập phân', soTiet: 3, icon: '🔟',
-    bgColor: '4338CA',
-    slides: [
-      { slide:1, loai:'bia', tieuDe:'KHÁI NIỆM SỐ THẬP PHÂN', noiDung:['Toán — Lớp 5','Kết nối tri thức với cuộc sống'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:null },
-      { slide:2, loai:'khoidong', tieuDe:'KHỞI ĐỘNG — Đo chiều cao', noiDung:['Bạn An cao 1 mét và 35 xăng-ti-mét','Viết là: 1m 35cm = 1,35m','Số 1,35 là một SỐ THẬP PHÂN','Vậy số thập phân là gì?'], hinhAnh:'Bạn nhỏ đứng cạnh thước đo chiều cao', hieuUng:null, troChoi:null, ghiChuGV:'Lấy ví dụ đo chiều cao HS trong lớp' },
-      { slide:3, loai:'kienthuc', tieuDe:'SỐ THẬP PHÂN', noiDung:['0,1 = 1/10 (một phần mười)','0,01 = 1/100 (một phần trăm)','0,001 = 1/1000 (một phần nghìn)','Dấu phẩy ngăn phần nguyên và phần thập phân'], hinhAnh:'Bảng giá trị hàng: đơn vị | phần mười | phần trăm', hieuUng:'Highlight từng hàng', troChoi:null, ghiChuGV:'Dùng bảng hàng đơn vị để minh họa' },
-      { slide:4, loai:'kienthuc', tieuDe:'CẤU TẠO SỐ THẬP PHÂN', noiDung:['Số 8,56 gồm:','Phần nguyên: 8','Dấu phẩy: ,','Phần thập phân: 56 (5 phần mười, 6 phần trăm)'], hinhAnh:'Số 8,56 phóng to, mũi tên chỉ từng phần, màu khác nhau', hieuUng:'Tô màu từng phần', troChoi:null, ghiChuGV:'Cho nhiều ví dụ: 3,7 — 12,05 — 0,123' },
-      { slide:5, loai:'vitduminhoa', tieuDe:'SỐ THẬP PHÂN TRONG CUỘC SỐNG', noiDung:['Giá xăng: 23.850 đồng/lít','Nhiệt độ: 36,5°C','Cân nặng: 32,7 kg','Chiều dài: 1,65 m'], hinhAnh:'Các hình ảnh: cây xăng, nhiệt kế, cân, thước đo', hieuUng:null, troChoi:null, ghiChuGV:'HS tự tìm thêm ví dụ' },
-      { slide:6, loai:'kienthuc', tieuDe:'ĐỌC SỐ THẬP PHÂN', noiDung:['0,5 → không phẩy năm','3,14 → ba phẩy mười bốn','12,007 → mười hai phẩy không không bảy','Đọc phần thập phân theo từng chữ số!'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:'Phân biệt: đọc "mười bốn" chứ không đọc "một bốn"' },
-      { slide:7, loai:'luyentap', tieuDe:'LUYỆN TẬP', noiDung:['Viết các phân số thành số thập phân:','7/10 = ?','23/100 = ?','456/1000 = ?','SGK bài tập trang 35'], hinhAnh:null, hieuUng:'Click hiện đáp án: 0,7 — 0,23 — 0,456', troChoi:null, ghiChuGV:'Nhấn mạnh: mẫu 10→1 chữ số, 100→2 chữ số, 1000→3 chữ số' },
-      { slide:8, loai:'trochoi', tieuDe:'TRÒ CHƠI — GHÉP SỐ', noiDung:['Ghép phần nguyên + phần thập phân','Tạo thành số thập phân đúng','Đội nào ghép nhiều số nhất thắng!'], hinhAnh:'Các thẻ số rời, dấu phẩy lớn', hieuUng:null, troChoi:{ten:'Ghép số thập phân',moTa:'Mỗi đội nhận thẻ chữ số và dấu phẩy, ghép thành số thập phân theo yêu cầu',luatChoi:'4 đội, mỗi lượt GV đọc yêu cầu, đội ghép đúng và nhanh +2 điểm',cauHoi:['Ghép số: bảy phẩy năm (7,5)','Ghép số: không phẩy hai ba (0,23)','Ghép số có phần nguyên là 15, phần TP là 08 (15,08)','Ghép số lớn nhất từ: 3, 7, 1 và dấu phẩy (73,1 hoặc 71,3)']}, ghiChuGV:'Chuẩn bị thẻ số 0-9 và dấu phẩy cho mỗi đội' },
-      { slide:9, loai:'vandung', tieuDe:'VẬN DỤNG', noiDung:['Đo chiều dài bàn học: ? cm → đổi ra m (STP)','Cân nặng cặp sách: ? g → đổi ra kg (STP)','Nhiệt độ hôm nay: ? °C (đọc số thập phân)'], hinhAnh:'HS đo đạc, ghi chép', hieuUng:null, troChoi:null, ghiChuGV:'Thực hành đo thật, viết kết quả dạng STP' },
-      { slide:10, loai:'tongket', tieuDe:'GHI NHỚ', noiDung:['Số thập phân gồm: phần nguyên + dấu phẩy + phần thập phân','Phần thập phân: hàng phần mười, phần trăm, phần nghìn','Đọc phần thập phân theo từng chữ số','Bài sau: So sánh các số thập phân'], hinhAnh:null, hieuUng:null, troChoi:null, ghiChuGV:'Dặn HS tìm 5 số thập phân trong cuộc sống, ghi vào vở' }
-    ]
-  }
-];
-
-// ========================================
-// SWITCH PAGE: TẠO MỚI ↔ KHO
-// ========================================
-
-function switchPage(page) {
-  // Toggle pages
-  document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.top-nav-btn').forEach(b => b.classList.remove('active'));
-
-  if (page === 'kho') {
-    document.getElementById('pageKho').classList.add('active');
-    document.getElementById('navKho').classList.add('active');
-    renderKhoCards('all');
-  } else {
-    document.getElementById('pageTaomoi').classList.add('active');
-    document.getElementById('navTaomoi').classList.add('active');
-  }
-}
-
-// ========================================
-// RENDER KHO CARDS
-// ========================================
-
-function renderKhoCards(filter) {
-  const grid = document.getElementById('khoGrid');
-  const filtered = filter === 'all' ? KHO_PPTX_DATA : KHO_PPTX_DATA.filter(k => k.lop === filter);
-
-  if (filtered.length === 0) {
-    grid.innerHTML = '<div class="empty-state"><div class="icon">📦</div><p>Chưa có bài giảng cho lớp này. Sẽ bổ sung sớm!</p></div>';
-    return;
-  }
-
-  grid.innerHTML = filtered.map((item, idx) => `
-    <div class="kho-card" style="animation-delay:${idx*0.05}s">
-      <div class="kho-card-thumb" style="background:linear-gradient(135deg, #${item.bgColor}, #${lightenColor(item.bgColor)});">
-        <span class="thumb-icon">${item.icon}</span>
-        <span class="thumb-label">${item.mon}</span>
-        <span class="thumb-slides">📊 ${item.slides.length} slides</span>
-      </div>
-      <div class="kho-card-body">
-        <div class="kho-lop">${item.lop} · ${item.soTiet} tiết</div>
-        <div class="kho-title">${item.bai}</div>
-        <div class="kho-chude">${item.chuDe}</div>
-        <button class="btn-download-kho" onclick="downloadKhoPptx('${item.id}')">
-          📥 Tải PowerPoint
-        </button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function lightenColor(hex) {
-  // Lighten a hex color by blending with white
-  let r = parseInt(hex.substr(0,2), 16);
-  let g = parseInt(hex.substr(2,2), 16);
-  let b = parseInt(hex.substr(4,2), 16);
-  r = Math.min(255, r + 60);
-  g = Math.min(255, g + 60);
-  b = Math.min(255, b + 60);
-  return r.toString(16).padStart(2,'0') + g.toString(16).padStart(2,'0') + b.toString(16).padStart(2,'0');
-}
-
-// ========================================
-// FILTER KHO
-// ========================================
-
-function filterKho(filter) {
-  document.querySelectorAll('.kho-filter-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  renderKhoCards(filter);
-}
-
-// ========================================
-// DOWNLOAD KHO PPTX
-// ========================================
-
-async function downloadKhoPptx(itemId) {
-  const item = KHO_PPTX_DATA.find(k => k.id === itemId);
-  if (!item) return;
-
-  // Tạm set selectedLesson để reuse hàm export
-  const prevLesson = selectedLesson;
-  selectedLesson = {
-    lop: item.lop, mon: item.mon, bai: item.bai, chuDe: item.chuDe, soTiet: item.soTiet
-  };
-
-  // Tạm set aiSlideScript
-  const prevSlide = aiSlideScript;
-  aiSlideScript = JSON.stringify(item.slides);
-
-  // Gọi exportPptx
-  await exportPptx();
-
-  // Khôi phục lại
-  selectedLesson = prevLesson;
-  aiSlideScript = prevSlide;
-}
+// Tải kho khi trang load
+loadKhoData();
 
 // ========================================
 // KHỞI TẠO
@@ -3145,8 +2763,192 @@ console.log('✅ Giáo Án AI - Sẵn sàng!');
 console.log('📖 Bộ sách: Kết nối tri thức với cuộc sống');
 console.log('🎓 Thiết kế: Chung Trần - Trường TH Diễn Liên');
 </script>
+
+<!-- THƯ VIỆN XUẤT FILE: Load cuối cùng để không block giao diện -->
+<script>
+// Dynamic load libraries - không block nếu CDN lỗi
+function loadScript(src, fallback) {
+  return new Promise((resolve) => {
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = () => resolve(true);
+    s.onerror = () => {
+      if (fallback) {
+        const s2 = document.createElement('script');
+        s2.src = fallback;
+        s2.onload = () => resolve(true);
+        s2.onerror = () => resolve(false);
+        document.body.appendChild(s2);
+      } else resolve(false);
+    };
+    document.body.appendChild(s);
+  });
+}
+
+(async function loadLibraries() {
+  const results = await Promise.all([
+    loadScript('https://cdn.jsdelivr.net/npm/docx@9.0.2/build/index.umd.min.js',
+               'https://unpkg.com/docx@9.0.2/build/index.umd.min.js'),
+    loadScript('https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgenjs.bundle.js',
+               'https://unpkg.com/pptxgenjs@3.12.0/dist/pptxgenjs.bundle.js'),
+    loadScript('https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js',
+               'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js')
+  ]);
+
+  const libs = ['docx', 'PptxGenJS', 'FileSaver'];
+  const failed = libs.filter((name, i) => !results[i]);
+  if (failed.length > 0) {
+    console.warn('⚠️ Chưa tải được:', failed.join(', '));
+    const b = document.createElement('div');
+    b.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#FEF3C7;color:#92400E;padding:10px 16px;font-size:13px;text-align:center;z-index:9999;font-family:sans-serif;';
+    b.innerHTML = '⚠️ Thư viện <b>'+failed.join(', ')+'</b> chưa tải được. Nhấn Ctrl+Shift+R để thử lại.';
+    document.body.appendChild(b);
+  } else {
+    console.log('✅ Tất cả thư viện đã sẵn sàng!');
+  }
+})();
+</script>
 </body>
 </html>
+
+[
+  {
+    "id": "l1_bai1", "lop": "Lớp 1", "mon": "Toán", "soSlide": 10, "mau": "#3B82F6",
+    "bai": "Bài 1: Các số 0, 1, 2, 3, 4, 5",
+    "chuDe": "Chủ đề 1: Các số từ 0 đến 10", "icon": "🔢",
+    "slides": [
+      {"loai":"bia","tieuDe":"CÁC SỐ 0, 1, 2, 3, 4, 5"},
+      {"loai":"khoidong","tieuDe":"Khởi động: Đếm đồ vật","noiDung":["Cô có mấy quả táo trên tay?","Cùng đếm theo cô: 1, 2, 3!","Trên bàn có bao nhiêu cái bút?"],"troChoi":{"ten":"Đếm theo nhạc","moTa":"Giáo viên vỗ tay, học sinh đếm theo","cauHoi":["Cô vỗ 3 cái, đó là số mấy?","Cô vỗ 5 cái, đó là số mấy?"]}},
+      {"loai":"kienthuc","tieuDe":"Số 1","noiDung":["Có 1 con mèo","Viết số 1","Số 1 đứng đầu tiên khi đếm"],"hinhAnh":"Hình 1 con mèo dễ thương, bên cạnh là số 1 cỡ lớn màu đỏ"},
+      {"loai":"kienthuc","tieuDe":"Số 2 và số 3","noiDung":["Có 2 con chim — viết số 2","Có 3 bông hoa — viết số 3","2 ít hơn 3, 3 nhiều hơn 2"],"hinhAnh":"2 con chim trên cành + 3 bông hoa dưới đất"},
+      {"loai":"kienthuc","tieuDe":"Số 4 và số 5","noiDung":["Có 4 ngôi sao — viết số 4","Có 5 ngón tay — viết số 5","Giơ tay đếm: 1, 2, 3, 4, 5!"],"hinhAnh":"Bàn tay xòe 5 ngón, mỗi ngón đánh số"},
+      {"loai":"kienthuc","tieuDe":"Số 0","noiDung":["Có 3 quả cam, ăn hết → còn 0","Số 0 nghĩa là không có gì","0 là số nhỏ nhất ta học hôm nay"],"hinhAnh":"Rổ trống không có quả cam nào"},
+      {"loai":"luyentap","tieuDe":"Luyện tập: Đếm và viết số","noiDung":["Đếm số con vật trong mỗi hình","Viết số tương ứng vào ô trống"],"troChoi":{"ten":"Ai nhanh hơn","moTa":"Giáo viên giơ hình, học sinh giơ thẻ số","cauHoi":["🐱🐱🐱 = ?","🌺🌺🌺🌺🌺 = ?","🍎 = ?","(rổ trống) = ?"]}},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Đúng hay Sai?","noiDung":["Giáo viên nói số — Học sinh nhìn hình xem đúng hay sai"],"troChoi":{"ten":"Đúng hay Sai","moTa":"Hiện hình và số, học sinh giơ thẻ Đ hoặc S","cauHoi":["🐟🐟🐟 = 4? (Sai, đáp án 3)","⭐⭐⭐⭐⭐ = 5? (Đúng)","🍌🍌 = 2? (Đúng)","🎈🎈🎈🎈 = 3? (Sai, đáp án 4)"]}},
+      {"loai":"vandung","tieuDe":"Vận dụng","noiDung":["Về nhà đếm số người trong gia đình","Đếm số cửa sổ trong phòng em","Hỏi bố mẹ: nhà mình có mấy cái ghế?"]},
+      {"loai":"tongket","tieuDe":"Tổng kết","noiDung":["Hôm nay ta học các số: 0, 1, 2, 3, 4, 5","Biết đếm và viết các số này","Dặn dò: Tập viết số vào vở ô li"]}
+    ]
+  },
+  {
+    "id": "l1_bai10", "lop": "Lớp 1", "mon": "Toán", "soSlide": 10, "mau": "#8B5CF6",
+    "bai": "Bài 10: Phép cộng trong phạm vi 10",
+    "chuDe": "Chủ đề 3: Phép cộng, phép trừ trong phạm vi 10", "icon": "➕",
+    "slides": [
+      {"loai":"bia","tieuDe":"PHÉP CỘNG TRONG PHẠM VI 10"},
+      {"loai":"khoidong","tieuDe":"Khởi động: Câu chuyện của thỏ","noiDung":["Thỏ có 2 củ cà rốt, mẹ cho thêm 3 củ","Hỏi: Thỏ có tất cả bao nhiêu củ?","Cùng tìm hiểu cách tính nhé!"],"hinhAnh":"Chú thỏ cầm 2 củ cà rốt + mẹ thỏ đưa 3 củ"},
+      {"loai":"kienthuc","tieuDe":"Phép cộng là gì?","noiDung":["Cộng = gộp lại, thêm vào","2 gộp với 3 → viết: 2 + 3 = 5","Dấu + đọc là cộng, dấu = đọc là bằng"],"hinhAnh":"2 quả táo xanh + 3 quả táo đỏ = 5 quả táo"},
+      {"loai":"vitduminhoa","tieuDe":"Ví dụ minh họa","noiDung":["1 + 4 = 5","3 + 2 = 5","0 + 5 = 5 (không có gì + 5 = 5)"],"hinhAnh":"Hình minh họa từng phép cộng với vật thật"},
+      {"loai":"kienthuc","tieuDe":"Cộng các số lớn hơn","noiDung":["4 + 3 = 7","5 + 5 = 10","6 + 4 = 10"],"hinhAnh":"Thanh khối 10 ô: tô màu 6 ô xanh + 4 ô vàng = 10"},
+      {"loai":"kienthuc","tieuDe":"Dùng ngón tay để cộng","noiDung":["Giơ 3 ngón tay trái, 4 ngón tay phải","Đếm tất cả: 1, 2, 3, 4, 5, 6, 7","Vậy 3 + 4 = 7"],"hinhAnh":"Hai bàn tay giơ ngón minh họa 3+4"},
+      {"loai":"luyentap","tieuDe":"Luyện tập","noiDung":["Tính: 2 + 6 = ?","Tính: 5 + 4 = ?","Tính: 1 + 8 = ?","Tính: 7 + 3 = ?"]},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Rung chuông vàng","noiDung":["Giáo viên đọc phép tính, học sinh giơ đáp án"],"troChoi":{"ten":"Rung chuông vàng","moTa":"Ai giơ đáp án đúng và nhanh nhất được 1 điểm","cauHoi":["3 + 5 = ? (8)","2 + 7 = ? (9)","6 + 4 = ? (10)","1 + 1 = ? (2)","4 + 4 = ? (8)"]}},
+      {"loai":"vandung","tieuDe":"Vận dụng thực tế","noiDung":["Em có 3 viên kẹo, bạn cho thêm 2 viên. Có tất cả mấy viên?","Trên bàn có 4 cốc, mẹ đặt thêm 5 cốc. Có tất cả mấy cốc?"]},
+      {"loai":"tongket","tieuDe":"Tổng kết","noiDung":["Phép cộng = gộp lại","Kết quả phép cộng không quá 10","Dặn dò: Làm bài tập trang 58-59 SGK"]}
+    ]
+  },
+  {
+    "id": "l2_bai37", "lop": "Lớp 2", "mon": "Toán", "soSlide": 10, "mau": "#059669",
+    "bai": "Bài 37: Phép nhân",
+    "chuDe": "Chủ đề 8: Phép nhân, phép chia", "icon": "✖️",
+    "slides": [
+      {"loai":"bia","tieuDe":"PHÉP NHÂN"},
+      {"loai":"khoidong","tieuDe":"Khởi động: Đếm nhóm","noiDung":["Có 3 đĩa, mỗi đĩa có 2 quả cam","Đếm tổng: 2 + 2 + 2 = 6","Có cách viết nào ngắn hơn không?"],"hinhAnh":"3 đĩa, mỗi đĩa 2 quả cam"},
+      {"loai":"kienthuc","tieuDe":"Phép nhân là gì?","noiDung":["2 + 2 + 2 = 2 × 3 = 6","Đọc: Hai nhân ba bằng sáu","Phép nhân = cộng nhiều số giống nhau","Dấu × gọi là dấu nhân"],"hinhAnh":"Phép cộng lặp → chuyển thành phép nhân"},
+      {"loai":"vitduminhoa","tieuDe":"Ví dụ","noiDung":["5 + 5 + 5 + 5 = 5 × 4 = 20","3 + 3 = 3 × 2 = 6","4 + 4 + 4 = 4 × 3 = 12"],"hinhAnh":"Từng nhóm đồ vật minh họa"},
+      {"loai":"kienthuc","tieuDe":"Các thành phần","noiDung":["2 × 3 = 6","2 là thừa số, 3 là thừa số, 6 là tích","Thừa số × Thừa số = Tích"]},
+      {"loai":"luyentap","tieuDe":"Luyện tập","noiDung":["Viết phép nhân: 4 + 4 + 4 + 4 + 4 = ?","3 + 3 + 3 = ? × ? = ?","Mỗi hộp có 5 bút, có 3 hộp. Viết phép nhân."]},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Nối cặp đôi","noiDung":["Nối phép cộng với phép nhân tương ứng"],"troChoi":{"ten":"Nối cặp đôi","moTa":"Học sinh nối phép cộng lặp với phép nhân đúng","cauHoi":["6+6+6 ↔ 6×3","2+2+2+2 ↔ 2×4","5+5 ↔ 5×2","3+3+3+3+3 ↔ 3×5"]}},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Vòng quay may mắn","noiDung":["Quay → ra phép nhân → trả lời"],"troChoi":{"ten":"Vòng quay may mắn","moTa":"Vòng quay hiện phép cộng lặp, học sinh viết phép nhân","cauHoi":["7+7+7 = ? (7×3=21)","9+9 = ? (9×2=18)","4+4+4+4 = ? (4×4=16)"]}},
+      {"loai":"vandung","tieuDe":"Vận dụng","noiDung":["Mỗi bàn có 4 học sinh, lớp có 5 bàn","Viết phép nhân tính tổng số học sinh","4 × 5 = 20 học sinh"]},
+      {"loai":"tongket","tieuDe":"Tổng kết","noiDung":["Phép nhân = cộng các số giống nhau","Dấu × đọc là nhân","Thừa số × Thừa số = Tích"]}
+    ]
+  },
+  {
+    "id": "l2_bai51", "lop": "Lớp 2", "mon": "Toán", "soSlide": 9, "mau": "#D97706",
+    "bai": "Bài 51: Số có ba chữ số",
+    "chuDe": "Chủ đề 10: Các số trong phạm vi 1000", "icon": "💯",
+    "slides": [
+      {"loai":"bia","tieuDe":"SỐ CÓ BA CHỮ SỐ"},
+      {"loai":"khoidong","tieuDe":"Khởi động: Đếm que tính","noiDung":["Bó 1 trăm que, bó 10 que, và que rời","Đếm: 100, 110, 120... rồi thêm que rời","Làm sao viết số có 3 chữ số?"],"hinhAnh":"Các bó que tính: 1 bó trăm, vài bó chục, vài que rời"},
+      {"loai":"kienthuc","tieuDe":"Cấu tạo số có ba chữ số","noiDung":["Số 235 gồm: 2 trăm, 3 chục, 5 đơn vị","Hàng trăm: 2 | Hàng chục: 3 | Hàng đơn vị: 5","Đọc: Hai trăm ba mươi lăm"]},
+      {"loai":"vitduminhoa","tieuDe":"Thêm ví dụ","noiDung":["407 = 4 trăm, 0 chục, 7 đơn vị → Bốn trăm linh bảy","150 = 1 trăm, 5 chục, 0 đơn vị → Một trăm năm mươi"]},
+      {"loai":"luyentap","tieuDe":"Luyện tập: Đọc và viết số","noiDung":["Viết số: Ba trăm sáu mươi hai = ?","Đọc số: 518 = ?","Số 790 có mấy trăm, mấy chục, mấy đơn vị?"]},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Ai nhanh hơn","noiDung":["Giáo viên đọc số → Học sinh viết bảng con"],"troChoi":{"ten":"Ai nhanh hơn","moTa":"Giáo viên đọc số, học sinh viết nhanh vào bảng con, giơ lên","cauHoi":["Năm trăm bốn mươi ba (543)","Bảy trăm linh một (701)","Chín trăm chín mươi chín (999)","Hai trăm hai mươi hai (222)"]}},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Ghép số","noiDung":["Dùng 3 thẻ số ghép thành số có 3 chữ số"],"troChoi":{"ten":"Ghép số","moTa":"Cho 3 thẻ số, ghép tất cả các số có 3 chữ số khác nhau","cauHoi":["Thẻ 3, 5, 1 → ghép được: 135, 153, 315, 351, 513, 531","Số lớn nhất là? (531)","Số nhỏ nhất là? (135)"]}},
+      {"loai":"vandung","tieuDe":"Vận dụng","noiDung":["Số nhà em là số có mấy chữ số?","Đọc số trang cuối cùng của sách Toán","Biển số xe nhà em có số nào có 3 chữ số?"]},
+      {"loai":"tongket","tieuDe":"Tổng kết","noiDung":["Số có 3 chữ số gồm: hàng trăm, hàng chục, hàng đơn vị","Biết đọc, viết số có ba chữ số","Dặn dò: Làm bài tập SGK trang 85"]}
+    ]
+  },
+  {
+    "id": "l3_bai9", "lop": "Lớp 3", "mon": "Toán", "soSlide": 10, "mau": "#DC2626",
+    "bai": "Bài 9: Bảng nhân 6, bảng chia 6",
+    "chuDe": "Chủ đề 2: Bảng nhân, bảng chia", "icon": "🔁",
+    "slides": [
+      {"loai":"bia","tieuDe":"BẢNG NHÂN 6, BẢNG CHIA 6"},
+      {"loai":"khoidong","tieuDe":"Khởi động: Ôn bảng nhân 5","noiDung":["5 × 3 = ?","5 × 7 = ?","5 × 9 = ?","Hôm nay ta học bảng nhân 6!"],"troChoi":{"ten":"Truyền điện","moTa":"Học sinh truyền nhau đọc bảng nhân 5, ai sai thì ngồi xuống","cauHoi":["5×1=5","5×4=20","5×8=40"]}},
+      {"loai":"kienthuc","tieuDe":"Lập bảng nhân 6","noiDung":["6×1=6 (lấy 6 một lần)","6×2=12 (lấy 6 hai lần: 6+6)","6×3=18 (lấy 6 ba lần: 6+6+6)","6×4=24 ... cho đến 6×10=60"],"hinhAnh":"Bảng nhân 6 đầy đủ, mỗi dòng kèm hình nhóm 6 chấm tròn"},
+      {"loai":"kienthuc","tieuDe":"Bảng nhân 6 đầy đủ","noiDung":["6×1=6   6×6=36","6×2=12  6×7=42","6×3=18  6×8=48","6×4=24  6×9=54","6×5=30  6×10=60"],"hinhAnh":"Bảng nhân 6 dạng poster đẹp, màu sắc"},
+      {"loai":"kienthuc","tieuDe":"Từ bảng nhân → bảng chia 6","noiDung":["6 × 4 = 24 → 24 : 6 = 4","6 × 7 = 42 → 42 : 6 = 7","Nhân và chia là hai phép tính ngược nhau"]},
+      {"loai":"luyentap","tieuDe":"Luyện tập","noiDung":["Tính: 6 × 5 = ?","Tính: 48 : 6 = ?","Tính: 6 × 9 = ?","Điền số: 6 × ? = 30"]},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Rung chuông vàng","noiDung":["10 câu hỏi nhân chia 6"],"troChoi":{"ten":"Rung chuông vàng","moTa":"Giáo viên đọc phép tính, học sinh giơ bảng con đáp án","cauHoi":["6×3=? (18)","36:6=? (6)","6×8=? (48)","54:6=? (9)","6×6=? (36)"]}},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Ong tìm hoa","noiDung":["Mỗi bông hoa có phép tính, ong bay đến hoa có đáp án đúng"],"troChoi":{"ten":"Ong tìm hoa","moTa":"Ong mang số, bay đến bông hoa có phép tính cho kết quả bằng số đó","cauHoi":["Ong số 42 → hoa 6×7","Ong số 30 → hoa 6×5","Ong số 12 → hoa 6×2"]}},
+      {"loai":"vandung","tieuDe":"Vận dụng","noiDung":["Mỗi tuần có 6 ngày đi học. Hỏi 4 tuần có bao nhiêu ngày đi học?","6 × 4 = 24 ngày"]},
+      {"loai":"tongket","tieuDe":"Tổng kết","noiDung":["Thuộc bảng nhân 6 từ 6×1 đến 6×10","Biết chia cho 6 dựa vào bảng nhân","Dặn dò: Học thuộc bảng nhân 6, làm VBT"]}
+    ]
+  },
+  {
+    "id": "l3_bai50", "lop": "Lớp 3", "mon": "Toán", "soSlide": 10, "mau": "#0891B2",
+    "bai": "Bài 50: Chu vi hình tam giác, hình tứ giác, hình chữ nhật, hình vuông",
+    "chuDe": "Chủ đề 9: Chu vi, diện tích", "icon": "📐",
+    "slides": [
+      {"loai":"bia","tieuDe":"CHU VI CÁC HÌNH"},
+      {"loai":"khoidong","tieuDe":"Khởi động: Đi dạo quanh sân","noiDung":["Em đi 1 vòng quanh sân trường","Quãng đường em đi = chu vi sân trường","Chu vi = tổng độ dài các cạnh bao quanh hình"],"hinhAnh":"Sân trường nhìn từ trên cao, đường đi quanh tô đỏ"},
+      {"loai":"kienthuc","tieuDe":"Chu vi hình tam giác","noiDung":["Hình tam giác có 3 cạnh","Chu vi = cạnh 1 + cạnh 2 + cạnh 3","Ví dụ: 3cm + 4cm + 5cm = 12cm"],"hinhAnh":"Hình tam giác có ghi độ dài 3 cạnh"},
+      {"loai":"kienthuc","tieuDe":"Chu vi hình chữ nhật","noiDung":["2 cạnh dài bằng nhau, 2 cạnh ngắn bằng nhau","Chu vi = (dài + rộng) × 2","Ví dụ: dài 5cm, rộng 3cm → CV = (5+3)×2 = 16cm"],"hinhAnh":"Hình chữ nhật có ghi chiều dài, chiều rộng, công thức"},
+      {"loai":"kienthuc","tieuDe":"Chu vi hình vuông","noiDung":["4 cạnh bằng nhau","Chu vi = cạnh × 4","Ví dụ: cạnh 4cm → CV = 4×4 = 16cm"],"hinhAnh":"Hình vuông có ghi độ dài cạnh, công thức"},
+      {"loai":"luyentap","tieuDe":"Luyện tập","noiDung":["Tính chu vi hình chữ nhật: dài 7cm, rộng 4cm","Tính chu vi hình vuông cạnh 6cm","Tam giác 3 cạnh: 5cm, 6cm, 8cm. Tính chu vi."]},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Đúng hay Sai","noiDung":["Giáo viên đưa kết quả, học sinh phán đoán"],"troChoi":{"ten":"Đúng hay Sai","moTa":"Hiện kết quả tính chu vi, học sinh giơ thẻ Đ/S","cauHoi":["HCN dài 5, rộng 3 → CV=15? (Sai, =16)","HV cạnh 5 → CV=20? (Đúng)","Tam giác 3,4,5 → CV=13? (Sai, =12)","HCN dài 8, rộng 2 → CV=20? (Đúng)"]}},
+      {"loai":"vandung","tieuDe":"Vận dụng","noiDung":["Đo cạnh bàn học rồi tính chu vi","Mảnh vườn HCN dài 10m, rộng 6m. Tính chu vi rào lưới.","(10+6)×2 = 32m"]},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Ai giỏi hơn","noiDung":["2 đội thi tính chu vi nhanh"],"troChoi":{"ten":"Ai giỏi hơn","moTa":"2 đội cử đại diện tính, đội nào đúng và nhanh hơn thắng","cauHoi":["HV cạnh 9cm → CV=? (36cm)","HCN 12cm×5cm → CV=? (34cm)","Tam giác 7,8,10 → CV=? (25cm)"]}},
+      {"loai":"tongket","tieuDe":"Tổng kết","noiDung":["Chu vi = tổng độ dài các cạnh","HCN: CV = (dài+rộng) × 2","HV: CV = cạnh × 4"]}
+    ]
+  },
+  {
+    "id": "l4_bai53", "lop": "Lớp 4", "mon": "Toán", "soSlide": 10, "mau": "#7C3AED",
+    "bai": "Bài 53: Khái niệm phân số",
+    "chuDe": "Chủ đề 10: Phân số", "icon": "🍕",
+    "slides": [
+      {"loai":"bia","tieuDe":"KHÁI NIỆM PHÂN SỐ"},
+      {"loai":"khoidong","tieuDe":"Khởi động: Chia bánh pizza","noiDung":["Cắt bánh pizza làm 4 phần bằng nhau","Bạn An ăn 1 phần","An ăn được bao nhiêu phần của cái bánh?"],"hinhAnh":"Bánh pizza chia 4 phần, tô màu 1 phần"},
+      {"loai":"kienthuc","tieuDe":"Phân số là gì?","noiDung":["An ăn 1 phần trong 4 phần → viết: 1/4","1/4 là một phân số","1 gọi là tử số (phần đã lấy)","4 gọi là mẫu số (tổng số phần bằng nhau)"],"hinhAnh":"Phân số 1/4 cỡ lớn, mũi tên chỉ tử số và mẫu số"},
+      {"loai":"vitduminhoa","tieuDe":"Ví dụ phân số","noiDung":["Hình tròn chia 3, tô 2 → 2/3","Hình vuông chia 8, tô 5 → 5/8","Băng giấy chia 6, tô 1 → 1/6"],"hinhAnh":"3 hình minh họa khác nhau cho 3 phân số"},
+      {"loai":"kienthuc","tieuDe":"Đọc phân số","noiDung":["1/2 đọc: một phần hai","3/4 đọc: ba phần tư","5/8 đọc: năm phần tám","Quy tắc: đọc tử số trước, mẫu số sau"]},
+      {"loai":"kienthuc","tieuDe":"Phân số đặc biệt","noiDung":["1/2 = một nửa","1/4 = một phần tư","3/4 = ba phần tư","4/4 = 1 (cả cái bánh)"]},
+      {"loai":"luyentap","tieuDe":"Luyện tập","noiDung":["Viết phân số chỉ phần tô màu của mỗi hình","Đọc các phân số: 2/5, 7/10, 3/8","Tô màu 3/4 hình chữ nhật"]},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Vòng quay phân số","noiDung":["Quay → ra hình → viết phân số"],"troChoi":{"ten":"Vòng quay may mắn","moTa":"Vòng quay hiện hình có tô màu, học sinh viết phân số tương ứng","cauHoi":["Hình tròn chia 2, tô 1 → 1/2","Hình vuông chia 4, tô 3 → 3/4","Băng giấy chia 5, tô 2 → 2/5","Hình tròn chia 8, tô 7 → 7/8"]}},
+      {"loai":"vandung","tieuDe":"Vận dụng","noiDung":["Lớp có 30 bạn, 15 bạn nữ → 15/30 = 1/2 lớp","Mẹ cắt dưa hấu 8 miếng, em ăn 3 miếng → 3/8 quả dưa"]},
+      {"loai":"tongket","tieuDe":"Tổng kết","noiDung":["Phân số gồm tử số (trên) và mẫu số (dưới)","Mẫu số = tổng phần chia đều, Tử số = phần được lấy","Dặn dò: Làm bài tập SGK trang 112"]}
+    ]
+  },
+  {
+    "id": "l5_bai27", "lop": "Lớp 5", "mon": "Toán", "soSlide": 11, "mau": "#0D9488",
+    "bai": "Bài 27: Đường tròn. Chu vi và diện tích hình tròn",
+    "chuDe": "Chủ đề 5: Một số hình phẳng. Chu vi và diện tích", "icon": "⭕",
+    "slides": [
+      {"loai":"bia","tieuDe":"ĐƯỜNG TRÒN — CHU VI VÀ DIỆN TÍCH HÌNH TRÒN"},
+      {"loai":"khoidong","tieuDe":"Khởi động: Vật hình tròn quanh ta","noiDung":["Kể tên đồ vật hình tròn: đồng hồ, bánh xe, nắp chai...","Làm sao tính được vòng quanh bánh xe?","Làm sao tính được mặt chiếc đĩa?"],"hinhAnh":"Nhiều vật hình tròn trong cuộc sống"},
+      {"loai":"kienthuc","tieuDe":"Các yếu tố của đường tròn","noiDung":["Tâm O: điểm chính giữa","Bán kính r: đoạn từ tâm đến đường tròn","Đường kính d: đoạn đi qua tâm, d = 2 × r","Ví dụ: r = 5cm → d = 10cm"],"hinhAnh":"Hình tròn có đánh dấu tâm O, bán kính r, đường kính d"},
+      {"loai":"kienthuc","tieuDe":"Số Pi (π)","noiDung":["π ≈ 3,14","π = Chu vi ÷ Đường kính","Đây là số cố định cho mọi hình tròn"],"hinhAnh":"Ký hiệu π cỡ lớn, kèm giá trị 3,14159..."},
+      {"loai":"kienthuc","tieuDe":"Công thức chu vi hình tròn","noiDung":["C = d × π = d × 3,14","Hoặc: C = 2 × r × 3,14","Ví dụ: d = 10cm → C = 10 × 3,14 = 31,4cm"],"hinhAnh":"Công thức C = d × 3,14 trong khung nổi bật"},
+      {"loai":"kienthuc","tieuDe":"Công thức diện tích hình tròn","noiDung":["S = r × r × π = r × r × 3,14","Ví dụ: r = 5cm → S = 5 × 5 × 3,14 = 78,5cm²","Nhớ: dùng bán kính (r), không phải đường kính!"],"hinhAnh":"Công thức S = r × r × 3,14 trong khung nổi bật"},
+      {"loai":"luyentap","tieuDe":"Luyện tập","noiDung":["Tính chu vi hình tròn có d = 6cm","Tính diện tích hình tròn có r = 4cm","Bánh xe đường kính 50cm. Tính chu vi."]},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Ai giỏi hơn","noiDung":["2 đội thi tính nhanh chu vi, diện tích"],"troChoi":{"ten":"Ai giỏi hơn","moTa":"2 đội, mỗi đội cử 1 bạn lên tính. Đúng và nhanh hơn được điểm.","cauHoi":["r=3cm, tính C? (18,84cm)","d=8cm, tính S? (r=4, S=50,24cm²)","r=10cm, tính C? (62,8cm)"]}},
+      {"loai":"trochoi","tieuDe":"Trò chơi: Đúng hay Sai","noiDung":["Giáo viên đưa kết quả, học sinh phán đoán"],"troChoi":{"ten":"Đúng hay Sai","moTa":"Hiện phép tính và kết quả, học sinh giơ Đ hoặc S","cauHoi":["r=5, C=31,4? (Đúng)","d=10, S=314? (Sai, S=78,5)","r=6, S=113,04? (Đúng)"]}},
+      {"loai":"vandung","tieuDe":"Vận dụng","noiDung":["Mặt đồng hồ đường kính 30cm.","CV = 30 × 3,14 = 94,2cm","S = 15 × 15 × 3,14 = 706,5cm²"]},
+      {"loai":"tongket","tieuDe":"Tổng kết","noiDung":["Chu vi: C = d × 3,14","Diện tích: S = r × r × 3,14","Nhớ: π ≈ 3,14","Dặn dò: Đo 1 vật tròn ở nhà, tính CV và DT"]}
+    ]
+  }
+]
 
 {
   "monHoc": "Toán",
